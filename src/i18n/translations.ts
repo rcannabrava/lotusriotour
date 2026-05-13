@@ -50,7 +50,17 @@ export type Dictionary = {
   testimonials: {
     eyebrow: string;
     title: string;
-    items: ReadonlyArray<{ quote: string; trip: string }>;
+    ratingLabel: string;
+    reviewsCount: string;
+    source: string;
+    showMore: string;
+    showLess: string;
+    items: ReadonlyArray<{
+      name: string;
+      time: string;
+      rating: number;
+      comment: string;
+    }>;
   };
   faq: {
     eyebrow: string;
@@ -193,21 +203,32 @@ export const translations: Record<Lang, Dictionary> = {
     testimonials: {
       eyebrow: "Travelers' words",
       title: "Stories that travel home with you.",
+      ratingLabel: "Excellent",
+      reviewsCount: "According to more than 115 reviews",
+      source: "Tripadvisor",
+      showMore: "More information",
+      showLess: "Show less",
       items: [
         {
-          quote:
-            "Patricia made Rio feel like home. Every detail was anticipated, every story unforgettable. The most thoughtful guide we've ever had.",
-          trip: "Rio Express",
+          name: "Sarah & Michael",
+          time: "2 weeks ago",
+          rating: 5,
+          comment:
+            "Patricia made Rio feel like home. Every detail was anticipated, every story unforgettable. The most thoughtful guide we've ever had — from Christ the Redeemer to a sunset stroll in Ipanema, the entire day flowed effortlessly.",
         },
         {
-          quote:
-            "Spoke perfect Spanish, knew every corner of the city, and turned a 3-day stop into the highlight of our entire South America trip.",
-          trip: "Tailor-Made Tour",
+          name: "Lucía Hernández",
+          time: "1 month ago",
+          rating: 5,
+          comment:
+            "Spoke perfect Spanish, knew every corner of the city, and turned a 3-day stop into the highlight of our entire South America trip. Her recommendations for restaurants and hidden viewpoints were spot on.",
         },
         {
-          quote:
-            "Safe, elegant, and incredibly attentive with our kids. The helicopter at sunset is something we'll talk about forever.",
-          trip: "Helicopter & Boat",
+          name: "The Whitman Family",
+          time: "3 months ago",
+          rating: 5,
+          comment:
+            "Safe, elegant, and incredibly attentive with our kids. The helicopter at sunset is something we'll talk about forever. Patricia anticipated every need and made our family feel completely at ease throughout the day.",
         },
       ],
     },
@@ -385,21 +406,32 @@ export const translations: Record<Lang, Dictionary> = {
     testimonials: {
       eyebrow: "Palavras dos viajantes",
       title: "Histórias que viajam de volta com você.",
+      ratingLabel: "Excelente",
+      reviewsCount: "De acordo com mais de 115 avaliações",
+      source: "Tripadvisor",
+      showMore: "Mais informações",
+      showLess: "Mostrar menos",
       items: [
         {
-          quote:
-            "Patricia fez o Rio parecer casa. Cada detalhe foi antecipado, cada história inesquecível. A guia mais cuidadosa que já tivemos.",
-          trip: "Rio Express",
+          name: "Sarah & Michael",
+          time: "há 2 semanas",
+          rating: 5,
+          comment:
+            "Patricia fez o Rio parecer casa. Cada detalhe foi antecipado, cada história inesquecível. A guia mais cuidadosa que já tivemos — do Cristo Redentor a uma caminhada ao pôr do sol em Ipanema, o dia inteiro fluiu sem esforço.",
         },
         {
-          quote:
-            "Falou espanhol perfeito, conhecia cada canto da cidade e transformou uma parada de 3 dias no destaque de toda a nossa viagem pela América do Sul.",
-          trip: "Tour Sob Medida",
+          name: "Lucía Hernández",
+          time: "há 1 mês",
+          rating: 5,
+          comment:
+            "Falou espanhol perfeito, conhecia cada canto da cidade e transformou uma parada de 3 dias no destaque de toda a nossa viagem pela América do Sul. As recomendações de restaurantes e mirantes escondidos foram certeiras.",
         },
         {
-          quote:
-            "Segura, elegante e incrivelmente atenciosa com nossas crianças. O helicóptero ao pôr do sol é algo que vamos lembrar para sempre.",
-          trip: "Helicóptero & Barco",
+          name: "Família Whitman",
+          time: "há 3 meses",
+          rating: 5,
+          comment:
+            "Segura, elegante e incrivelmente atenciosa com nossas crianças. O helicóptero ao pôr do sol é algo que vamos lembrar para sempre. Patricia antecipou cada necessidade e fez nossa família se sentir totalmente à vontade durante o dia.",
         },
       ],
     },
@@ -577,21 +609,32 @@ export const translations: Record<Lang, Dictionary> = {
     testimonials: {
       eyebrow: "Palabras de viajeros",
       title: "Historias que viajan a casa contigo.",
+      ratingLabel: "Excelente",
+      reviewsCount: "Según más de 115 opiniones",
+      source: "Tripadvisor",
+      showMore: "Más información",
+      showLess: "Mostrar menos",
       items: [
         {
-          quote:
-            "Patricia hizo que Río se sintiera como casa. Cada detalle fue anticipado, cada historia inolvidable. La guía más atenta que hemos tenido.",
-          trip: "Río Express",
+          name: "Sarah & Michael",
+          time: "hace 2 semanas",
+          rating: 5,
+          comment:
+            "Patricia hizo que Río se sintiera como casa. Cada detalle fue anticipado, cada historia inolvidable. La guía más atenta que hemos tenido — desde el Cristo Redentor hasta un paseo al atardecer en Ipanema, todo el día fluyó sin esfuerzo.",
         },
         {
-          quote:
-            "Habló un español perfecto, conocía cada rincón de la ciudad y convirtió una parada de 3 días en lo mejor de todo nuestro viaje por Sudamérica.",
-          trip: "Tour a Medida",
+          name: "Lucía Hernández",
+          time: "hace 1 mes",
+          rating: 5,
+          comment:
+            "Habló un español perfecto, conocía cada rincón de la ciudad y convirtió una parada de 3 días en lo mejor de todo nuestro viaje por Sudamérica. Sus recomendaciones de restaurantes y miradores escondidos fueron certeras.",
         },
         {
-          quote:
-            "Segura, elegante e increíblemente atenta con nuestros niños. El helicóptero al atardecer es algo que recordaremos para siempre.",
-          trip: "Helicóptero y Barco",
+          name: "Familia Whitman",
+          time: "hace 3 meses",
+          rating: 5,
+          comment:
+            "Segura, elegante e increíblemente atenta con nuestros niños. El helicóptero al atardecer es algo que recordaremos para siempre. Patricia anticipó cada necesidad e hizo que nuestra familia se sintiera completamente cómoda durante el día.",
         },
       ],
     },
