@@ -8,7 +8,7 @@ import { useTranslation } from "@/i18n/LanguageProvider";
 export function Hero() {
   const { t } = useTranslation();
   return (
-    <section className="relative h-[100svh] min-h-[640px] w-full overflow-hidden">
+    <section className="relative h-svh min-h-160 w-full overflow-hidden">
       <img
         src={heroImg}
         alt="Aerial view of Rio de Janeiro at sunset with Christ the Redeemer"

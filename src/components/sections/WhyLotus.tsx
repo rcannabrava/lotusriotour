@@ -27,7 +27,7 @@ export function WhyLotus() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.6, delay: i * 0.05 }}
-                className="rounded-2xl border border-white/10 bg-white/[0.04] p-8 backdrop-blur-sm transition-colors hover:bg-white/[0.07]"
+                className="rounded-2xl border border-white/10 bg-white/4 p-8 backdrop-blur-sm transition-colors hover:bg-white/[0.07]"
               >
                 <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gold/15 text-gold">
                   <Icon size={20} strokeWidth={1.6} />
