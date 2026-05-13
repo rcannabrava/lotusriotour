@@ -1,46 +1,146 @@
-import { motion } from "framer-motion";
-import { Quote } from "lucide-react";
-import { testimonials } from "@/data/testimonials";
+import { useState } from "react";
+
 import { useTranslation } from "@/i18n/LanguageProvider";
 
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Mousewheel, FreeMode } from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/free-mode";
+
+import { testimonials } from "@/data/testimonials";
+
 export function Testimonials() {
+  const [expandedReview, setExpandedReview] = useState<number | null>(null);
   const { t } = useTranslation();
   return (
     <section id="reviews" className="bg-background py-28 lg:py-40">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-2xl">
           <span className="eyebrow text-gold">{t.testimonials.eyebrow}</span>
+
           <h2 className="mt-5 font-display text-4xl leading-tight text-balance sm:text-5xl">
             {t.testimonials.title}
           </h2>
         </div>
 
-        <div className="mt-16 grid gap-7 lg:grid-cols-3">
-          {testimonials.map((person, i) => {
-            const item = t.testimonials.items[i];
-            if (!item) return null;
-            return (
-              <motion.figure
-                key={person.name}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.6, delay: i * 0.08 }}
-                className="flex flex-col rounded-2xl bg-card p-9 shadow-soft ring-1 ring-border"
-              >
-                <Quote className="text-gold" size={28} />
-                <blockquote className="mt-5 flex-1 font-display text-xl leading-relaxed text-foreground">
-                  "{item.quote}"
-                </blockquote>
-                <figcaption className="mt-8 border-t border-border pt-5">
-                  <div className="font-medium text-foreground">{person.name}</div>
-                  <div className="mt-1 text-xs uppercase tracking-widest text-muted-foreground">
-                    {person.origin} · {item.trip}
+        <div className="mt-16 grid items-center gap-10 lg:grid-cols-[320px_1fr]">
+          <div>
+            <h3 className="text-5xl font-bold uppercase text-black">Excelent</h3>
+
+            <div className="mt-6 flex gap-2">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <img
+                  key={i}
+                  src="https://cdn.trustindex.io/assets/platform/Tripadvisor/star/f.svg"
+                  alt="star"
+                  className="h-10 w-10"
+                />
+              ))}
+            </div>
+
+            <p className="mt-4 text-lg text-black/70">
+              According to more than <strong>115 reviews</strong>
+            </p>
+
+            <div className="mt-6 flex items-center gap-3">
+              <img
+                src="https://cdn.trustindex.io/assets/platform/Tripadvisor/icon.svg"
+                alt="Tripadvisor"
+                className="h-8"
+              />
+
+              <span className="text-2xl font-semibold text-black">Tripadvisor</span>
+            </div>
+          </div>
+
+          <div className="overflow-hidden">
+            <Swiper
+              className="overflow-visible!"
+              modules={[Autoplay, Mousewheel, FreeMode]}
+              slidesPerView={1.2}
+              mousewheel={{
+                forceToAxis: true,
+                sensitivity: 1,
+              }}
+              freeMode={{
+                enabled: true,
+                momentum: true,
+                momentumRatio: 0.35,
+                momentumVelocityRatio: 0.8,
+              }}
+              autoplay={{
+                delay: 3500,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }}
+              loop
+              spaceBetween={24}
+              breakpoints={{
+                768: {
+                  slidesPerView: 2,
+                },
+
+                1280: {
+                  slidesPerView: 2.4,
+                },
+              }}
+            >
+              {testimonials.map((item) => (
+                <SwiperSlide key={item.id}>
+                  <div className="h-full min-h-80 rounded-3xl bg-white p-6 text-black">
+                    <div className="flex items-start justify-between">
+                      <div className="flex items-center gap-4">
+                        <img
+                          src={item.avatar}
+                          alt={item.name}
+                          className="h-14 w-14 rounded-full object-cover"
+                        />
+
+                        <div>
+                          <h3 className="text-xl font-semibold">{item.name}</h3>
+
+                          <p className="text-sm text-black/50">{item.time}</p>
+                        </div>
+                      </div>
+
+                      <img
+                        src="https://cdn.trustindex.io/assets/platform/Tripadvisor/icon.svg"
+                        alt="Tripadvisor"
+                        className="h-6"
+                      />
+                    </div>
+
+                    <div className="mt-6 flex gap-1">
+                      {Array.from({ length: item.rating }).map((_, i) => (
+                        <img
+                          key={i}
+                          src="https://cdn.trustindex.io/assets/platform/Tripadvisor/star/f.svg"
+                          alt="star"
+                          className="h-7 w-7"
+                        />
+                      ))}
+                    </div>
+
+                    <p
+                      className={`mt-6 text-lg leading-relaxed text-black/80 transition-all duration-500 ease-in-out ${
+                        expandedReview === item.id ? "" : "line-clamp-4"
+                      }`}
+                    >
+                      {item.comment}
+                    </p>
+
+                    <button
+                      onClick={() => setExpandedReview(expandedReview === item.id ? null : item.id)}
+                      className="mt-8 text-lg font-medium text-black/40 transition hover:text-black"
+                    >
+                      {expandedReview === item.id ? "Show less" : "Show more"}
+                    </button>
                   </div>
-                </figcaption>
-              </motion.figure>
-            );
-          })}
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
       </div>
     </section>
