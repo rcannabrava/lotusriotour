@@ -26,7 +26,7 @@ export function Hero() {
           transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-3xl"
         >
-          <span className="eyebrow inline-flex items-center gap-2 text-[#5b91c1]">
+          <span className="eyebrow inline-flex items-center gap-2 text-white">
             <MapPin size={14} /> {t.hero.eyebrow}
           </span>
           <h1 className="mt-6 font-display text-5xl leading-[1.05] text-white text-balance sm:text-6xl lg:text-7xl">

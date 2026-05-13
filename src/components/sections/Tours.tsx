@@ -32,16 +32,16 @@ export function Tours() {
                 transition={{ duration: 0.6, delay: i * 0.06 }}
                 className="group overflow-hidden rounded-2xl bg-card shadow-soft ring-1 ring-border transition-all duration-500 hover:-translate-y-1 hover:shadow-elegant"
               >
-                <div className="relative aspect-[4/5] overflow-hidden">
+                <div className="relative aspect-4/5 overflow-hidden">
                   <img
                     src={tour.image}
                     alt={item.title}
                     loading="lazy"
                     width={1280}
                     height={1600}
-                    className="h-full w-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+                    className="h-full w-full object-cover transition-transform duration-1200ms group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent" />
                   {highlightLabel && (
                     <span className="absolute left-5 top-5 rounded-full bg-gold px-3 py-1 text-[10px] font-semibold uppercase tracking-widest text-gold-foreground">
                       {highlightLabel}

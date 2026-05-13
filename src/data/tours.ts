@@ -4,7 +4,6 @@ import natureImg from "@/assets/tour-nature.jpg";
 import helicopterImg from "@/assets/tour-helicopter.jpg";
 import carnavalImg from "@/assets/tour-carnaval.jpg";
 import boatImg from "@/assets/tour-boat.jpg";
-import logo from "@/assets/logo.svg";
 
 export type TourId =
   | "rio-express"
