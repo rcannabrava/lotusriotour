@@ -7,7 +7,13 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { DEFAULT_LANG, LANGUAGES, translations, type Dictionary, type Lang } from "./translations";
+import {
+  DEFAULT_LANG,
+  LANGUAGES,
+  translations,
+  type Dictionary,
+  type Lang,
+} from "./translations";
 
 const STORAGE_KEY = "lotus.lang";
 
@@ -49,9 +55,14 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const value = useMemo<Ctx>(() => ({ lang, setLang, t: translations[lang] }), [lang, setLang]);
+  const value = useMemo<Ctx>(
+    () => ({ lang, setLang, t: translations[lang] }),
+    [lang, setLang],
+  );
 
-  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
+  return (
+    <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>
+  );
 }
 
 export function useTranslation() {

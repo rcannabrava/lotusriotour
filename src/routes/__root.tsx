@@ -74,31 +74,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Lotus Rio Tour — Private Tour Guide in Rio de Janeiro" },
-      {
-        name: "description",
-        content: "Bespoke private tours of Rio de Janeiro by Patricia Cannabrava.",
-      },
+      { name: "description", content: "Bespoke private tours of Rio de Janeiro by Patricia Cannabrava." },
       { name: "twitter:card", content: "summary_large_image" },
       { property: "og:title", content: "Lotus Rio Tour — Private Tour Guide in Rio de Janeiro" },
       { name: "twitter:title", content: "Lotus Rio Tour — Private Tour Guide in Rio de Janeiro" },
-      {
-        property: "og:description",
-        content: "Bespoke private tours of Rio de Janeiro by Patricia Cannabrava.",
-      },
-      {
-        name: "twitter:description",
-        content: "Bespoke private tours of Rio de Janeiro by Patricia Cannabrava.",
-      },
-      {
-        property: "og:image",
-        content:
-          "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/c1d62e21-33ab-4534-b838-1f83aa33b88c",
-      },
-      {
-        name: "twitter:image",
-        content:
-          "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/c1d62e21-33ab-4534-b838-1f83aa33b88c",
-      },
+      { property: "og:description", content: "Bespoke private tours of Rio de Janeiro by Patricia Cannabrava." },
+      { name: "twitter:description", content: "Bespoke private tours of Rio de Janeiro by Patricia Cannabrava." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/c1d62e21-33ab-4534-b838-1f83aa33b88c" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/c1d62e21-33ab-4534-b838-1f83aa33b88c" },
       { property: "og:type", content: "website" },
     ],
     links: [

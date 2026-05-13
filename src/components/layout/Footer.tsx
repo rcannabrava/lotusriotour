@@ -48,7 +48,6 @@ export function Footer() {
         <div className="lg:col-span-4">
           <h4 className="text-xs uppercase tracking-widest text-gold">{t.footer.contact}</h4>
           <ul className="mt-5 space-y-3 text-sm text-white/70">
-            <li>{SITE.pickup}</li>
             <li>
               <a
                 href={SITE.whatsappUrl}

@@ -83,8 +83,8 @@ export const translations: Record<Lang, Dictionary> = {
     languageSwitcher: { label: "Select language" },
     hero: {
       eyebrow: "Rio de Janeiro · Brazil",
-      titleLine1: "Rio, slowly.",
-      titleLine2: "Privately. Beautifully.",
+      titleLine1: "Rio, at your pace.",
+      titleLine2: "Private. Seamless. Authentic.",
       description:
         "A bespoke private guiding service by Patricia Cannabrava. Ten years designing intimate, unhurried days in the marvelous city — for travelers who want to truly feel it.",
       ctaPrimary: "Start planning on WhatsApp",
@@ -258,7 +258,7 @@ export const translations: Record<Lang, Dictionary> = {
       contact: "Contact",
       languagesLabel: "Languages",
       rights: "All rights reserved.",
-      crafted: "Crafted in Rio de Janeiro · Brasil",
+      crafted: "Created in Rio de Janeiro · Brasil",
     },
     whatsappAria: "Chat on WhatsApp",
   },
@@ -276,7 +276,7 @@ export const translations: Record<Lang, Dictionary> = {
     hero: {
       eyebrow: "Rio de Janeiro · Brasil",
       titleLine1: "Rio, sem pressa.",
-      titleLine2: "Privativo. Sob medida.",
+      titleLine2: "Privativo. Sob medida. Autêntico.",
       description:
         "Um serviço de guia privativo by Patricia Cannabrava. Dez anos desenhando dias íntimos e tranquilos na cidade maravilhosa — para viajantes que querem realmente senti-la.",
       ctaPrimary: "Planejar pelo WhatsApp",

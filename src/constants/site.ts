@@ -4,10 +4,8 @@ export const SITE = {
   tagline: "Private Tour Guide in Rio de Janeiro",
   whatsappNumber: "5521971577557",
   whatsappUrl: "https://wa.me/5521971577557",
-  email: "contact@lotusriotour.com.br",
   instagram: "https://www.instagram.com/lotusriotour",
   facebook: "https://www.facebook.com/lotusturismoeeventos",
-  pickup: "Hotel pickup in Barra da Tijuca",
   languages: ["Portuguese", "English", "Spanish"],
 } as const;
 
