@@ -67,7 +67,7 @@
   --accent-foreground: oklch(0.22 0.04 200);
 
   /* Warm gold */
-  --gold: oklch(0.74 0.13 75);
+  --gold: #bad448;
   --gold-foreground: oklch(0.18 0.025 200);
 
   --destructive: oklch(0.55 0.22 25);

@@ -24,7 +24,7 @@ export function About() {
           <div className="relative">
             <img
               src={aboutImg}
-              alt="Colorful colonial street in Santa Teresa, Rio de Janeiro"
+              alt="Copacabana beach, Rio de Janeiro"
               loading="lazy"
               width={1280}
               height={1600}

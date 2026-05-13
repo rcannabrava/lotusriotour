@@ -1,6 +1,7 @@
 import { Instagram, Facebook, MessageCircle } from "lucide-react";
 import { SITE } from "@/constants/site";
 import { useTranslation } from "@/i18n/LanguageProvider";
+import logo from "@/assets/logo.svg";
 
 export function Footer() {
   const { t } = useTranslation();
@@ -16,7 +17,7 @@ export function Footer() {
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 lg:grid-cols-12 lg:px-10">
         <div className="lg:col-span-5">
           <div className="font-display text-2xl text-white">
-            Lotus<span className="text-gold">.</span>Rio
+            <img src={logo} alt="Lotus Rio Tour" className="h-20 w-auto inline-block mb-1" />{" "}
           </div>
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/65">{t.footer.tagline}</p>
           <div className="mt-8 flex items-center gap-3">

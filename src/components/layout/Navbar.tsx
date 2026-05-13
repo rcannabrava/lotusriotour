@@ -5,6 +5,7 @@ import { SITE } from "@/constants/site";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "@/i18n/LanguageProvider";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import logo from "@/assets/logo.svg";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -30,9 +31,7 @@ export function Navbar() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-        scrolled
-          ? "bg-background/85 backdrop-blur-xl border-b border-border/60"
-          : "bg-transparent"
+        scrolled ? "bg-background/85 backdrop-blur-xl border-b border-border/60" : "bg-transparent",
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
@@ -40,10 +39,10 @@ export function Navbar() {
           to="/"
           className={cn(
             "font-display text-xl tracking-tight transition-colors",
-            scrolled ? "text-foreground" : "text-white"
+            scrolled ? "text-foreground" : "text-white",
           )}
         >
-          Lotus<span className="text-gold">.</span>Rio
+          <img src={logo} alt="Lotus Rio Tour" className="h-20 w-auto" />
         </Link>
 
         <nav className="hidden items-center gap-9 md:flex">
@@ -53,7 +52,7 @@ export function Navbar() {
               href={l.href}
               className={cn(
                 "text-sm transition-colors hover:text-gold",
-                scrolled ? "text-foreground/80" : "text-white/85"
+                scrolled ? "text-foreground/80" : "text-white/85",
               )}
             >
               {l.label}
