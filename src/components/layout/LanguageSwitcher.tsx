@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Check, ChevronDown, Globe } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { LANGUAGES, type Lang } from "@/i18n/translations";
-import { useTranslation } from "@/i18n/LanguageProvider";
+import { useTranslate } from "@tolgee/react";
+import { LANGUAGES, type Lang } from "@/i18n/languages";
+import { useLanguage } from "@/i18n/LanguageProvider";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -11,7 +12,8 @@ type Props = {
 };
 
 export function LanguageSwitcher({ variant = "floating", className }: Props) {
-  const { lang, setLang, t } = useTranslation();
+  const { lang, setLang } = useLanguage();
+  const { t } = useTranslate();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -37,6 +39,8 @@ export function LanguageSwitcher({ variant = "floating", className }: Props) {
       ? "border-white/25 bg-white/10 text-white backdrop-blur-md hover:bg-white/15"
       : "border-border bg-background/80 text-foreground hover:bg-secondary";
 
+  const label = t("language_switcher.label", "Select language");
+
   return (
     <div ref={ref} className={cn("relative", className)}>
       <button
@@ -44,7 +48,7 @@ export function LanguageSwitcher({ variant = "floating", className }: Props) {
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="listbox"
         aria-expanded={open}
-        aria-label={t.languageSwitcher.label}
+        aria-label={label}
         className={cn(
           "inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-xs font-medium uppercase tracking-[0.18em] transition-all duration-300",
           triggerStyles,
@@ -63,7 +67,7 @@ export function LanguageSwitcher({ variant = "floating", className }: Props) {
         {open && (
           <motion.ul
             role="listbox"
-            aria-label={t.languageSwitcher.label}
+            aria-label={label}
             initial={{ opacity: 0, y: -6, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -6, scale: 0.98 }}

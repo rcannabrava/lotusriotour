@@ -3,10 +3,10 @@ import { motion } from "framer-motion";
 import { ArrowDown, MapPin } from "lucide-react";
 import heroImg from "@/assets/hero-rio.jpg";
 import { SITE } from "@/constants/site";
-import { useTranslation } from "@/i18n/LanguageProvider";
+import { useTranslate } from "@tolgee/react";
 
 export function Hero() {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   return (
     <section className="relative h-svh min-h-160 w-full overflow-hidden">
       <img
@@ -27,15 +27,15 @@ export function Hero() {
           className="max-w-3xl"
         >
           <span className="eyebrow inline-flex items-center gap-2 text-white">
-            <MapPin size={14} /> {t.hero.eyebrow}
+            <MapPin size={14} /> {t("hero.eyebrow")}
           </span>
           <h1 className="mt-6 font-display text-5xl leading-[1.05] text-white text-balance sm:text-6xl lg:text-7xl">
-            {t.hero.titleLine1}
+            {t("hero.titleLine1")}
             <br />
-            <span className="italic text-gold">{t.hero.titleLine2}</span>
+            <span className="italic text-gold">{t("hero.titleLine2")}</span>
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
-            {t.hero.description}
+            {t("hero.description")}
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -45,14 +45,14 @@ export function Hero() {
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-2 rounded-full bg-gold px-7 py-4 text-sm font-medium text-gold-foreground shadow-elegant transition-transform hover:scale-[1.03]"
             >
-              {t.hero.ctaPrimary}
+              {t("hero.ctaPrimary")}
               <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
             </a>
             <a
               href="#tours"
               className="inline-flex items-center gap-2 rounded-full border border-white/30 px-7 py-4 text-sm font-medium text-white backdrop-blur-md transition-colors hover:bg-white/10"
             >
-              {t.hero.ctaSecondary}
+              {t("hero.ctaSecondary")}
             </a>
           </div>
         </motion.div>
@@ -65,7 +65,7 @@ export function Hero() {
           className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-white/70 lg:flex"
           aria-label="Scroll down"
         >
-          <span className="text-[10px] tracking-[0.4em]">{t.hero.scroll}</span>
+          <span className="text-[10px] tracking-[0.4em]">{t("hero.scroll")}</span>
           <ArrowDown size={16} className="animate-bounce" />
         </motion.a>
       </div>

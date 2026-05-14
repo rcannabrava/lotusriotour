@@ -1,61 +1,38 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-  type ReactNode,
-} from "react";
-import { DEFAULT_LANG, LANGUAGES, translations, type Dictionary, type Lang } from "./translations";
+import { useCallback, useEffect, type ReactNode } from "react";
+import { TolgeeProvider, useTolgee } from "@tolgee/react";
+import { tolgee } from "./tolgee";
 
-const STORAGE_KEY = "lotus.lang";
+import { DEFAULT_LANG, LANGUAGES, type Lang } from "./languages";
 
-type Ctx = {
-  lang: Lang;
-  setLang: (l: Lang) => void;
-  t: Dictionary;
-};
-
-const LanguageContext = createContext<Ctx | null>(null);
-
-function detectInitialLang(): Lang {
-  if (typeof window === "undefined") return DEFAULT_LANG;
-  const stored = window.localStorage.getItem(STORAGE_KEY) as Lang | null;
-  if (stored && LANGUAGES.some((l) => l.code === stored)) return stored;
-  const nav = window.navigator?.language?.toLowerCase() ?? "";
-  if (nav.startsWith("pt")) return "pt-BR";
-  if (nav.startsWith("es")) return "es";
-  return DEFAULT_LANG;
-}
-
+export { useTranslate } from "@tolgee/react";
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(DEFAULT_LANG);
-
-  useEffect(() => {
-    setLangState(detectInitialLang());
-  }, []);
-
-  useEffect(() => {
-    if (typeof document !== "undefined") {
-      document.documentElement.lang = lang;
-    }
-  }, [lang]);
-
-  const setLang = useCallback((l: Lang) => {
-    setLangState(l);
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem(STORAGE_KEY, l);
-    }
-  }, []);
-
-  const value = useMemo<Ctx>(() => ({ lang, setLang, t: translations[lang] }), [lang, setLang]);
-
-  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
+  return (
+    <TolgeeProvider tolgee={tolgee} fallback={null}>
+      <HtmlLangSync />
+      {children}
+    </TolgeeProvider>
+  );
+}
+function isLang(value: string | undefined): value is Lang {
+  return !!value && LANGUAGES.some((l) => l.code === value);
 }
 
-export function useTranslation() {
-  const ctx = useContext(LanguageContext);
-  if (!ctx) throw new Error("useTranslation must be used inside LanguageProvider");
-  return ctx;
+export function useLanguage() {
+  const tg = useTolgee(["language"]);
+  const raw = tg.getLanguage();
+  const lang: Lang = isLang(raw) ? raw : DEFAULT_LANG;
+  const setLang = useCallback(
+    (l: Lang) => {
+      void tg.changeLanguage(l);
+    },
+    [tg],
+  );
+  return { lang, setLang };
+}
+function HtmlLangSync() {
+  const { lang } = useLanguage();
+  useEffect(() => {
+    if (typeof document !== "undefined") document.documentElement.lang = lang;
+  }, [lang]);
+  return null;
 }

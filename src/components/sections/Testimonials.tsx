@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useTranslation } from "@/i18n/LanguageProvider";
+import { useTranslate } from "@tolgee/react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Mousewheel, FreeMode } from "swiper/modules";
@@ -12,15 +12,14 @@ import { testimonials } from "@/data/testimonials";
 
 export function Testimonials() {
   const [expandedReview, setExpandedReview] = useState<number | null>(null);
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   return (
     <section id="reviews" className="bg-background py-28 lg:py-40">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-2xl">
-          <span className="eyebrow text-gold">{t.testimonials.eyebrow}</span>
-
+          <span className="eyebrow text-gold">{t("testimonials.eyebrow")}</span>
           <h2 className="mt-5 font-display text-4xl leading-tight text-balance sm:text-5xl">
-            {t.testimonials.title}
+            {t("testimonials.title")}
           </h2>
         </div>
 

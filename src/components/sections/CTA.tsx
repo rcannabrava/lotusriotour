@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import heroImg from "@/assets/hero-rio.jpg";
 import { SITE } from "@/constants/site";
-import { useTranslation } from "@/i18n/LanguageProvider";
+import { useTranslate } from "@tolgee/react";
 
 export function CTA() {
-  const { t } = useTranslation();
+  const { t } = useTranslate();
   return (
     <section className="relative overflow-hidden">
       <img
@@ -23,11 +23,11 @@ export function CTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <span className="eyebrow text-gold">{t.cta.eyebrow}</span>
+          <span className="eyebrow text-gold">{t("cta.eyebrow")}</span>
           <h2 className="mt-6 font-display text-4xl leading-[1.1] text-balance sm:text-6xl">
-            {t.cta.title}
+            {t("cta.title")}
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-white/80">{t.cta.intro}</p>
+          <p className="mx-auto mt-6 max-w-xl text-white/80">{t("cta.intro")}</p>
           <a
             href={SITE.whatsappUrl}
             target="_blank"
@@ -35,9 +35,11 @@ export function CTA() {
             className="mt-10 inline-flex items-center gap-3 rounded-full bg-gold px-8 py-4 text-sm font-medium text-gold-foreground shadow-elegant transition-transform hover:scale-[1.03]"
           >
             <MessageCircle size={18} />
-            {t.cta.button}
+            {t("cta.button")}
           </a>
-          <p className="mt-5 text-xs uppercase tracking-widest text-white/55">{t.cta.footnote}</p>
+          <p className="mt-5 text-xs uppercase tracking-widest text-white/55">
+            {t("cta.footnote")}
+          </p>
         </motion.div>
       </div>
     </section>
