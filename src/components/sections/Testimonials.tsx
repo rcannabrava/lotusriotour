@@ -25,7 +25,9 @@ export function Testimonials() {
 
         <div className="mt-16 grid items-center gap-10 lg:grid-cols-[320px_1fr]">
           <div>
-            <h3 className="text-5xl font-bold uppercase text-black">Excelent</h3>
+            <h3 className="text-5xl font-bold uppercase text-black">
+              {t("testimonials.subtitle")}
+            </h3>
 
             <div className="mt-6 flex gap-2">
               {Array.from({ length: 5 }).map((_, i) => (
@@ -38,9 +40,7 @@ export function Testimonials() {
               ))}
             </div>
 
-            <p className="mt-4 text-lg text-black/70">
-              According to more than <strong>115 reviews</strong>
-            </p>
+            <p className="mt-4 text-lg text-black/70">{t("testimonials.description")}</p>
 
             <div className="mt-6 flex items-center gap-3">
               <img
@@ -99,7 +99,9 @@ export function Testimonials() {
                         <div>
                           <h3 className="text-xl font-semibold">{item.name}</h3>
 
-                          <p className="text-sm text-black/50">{item.time}</p>
+                          <p className="text-sm text-black/50">
+                            {t(`testimonials.time.${item.id - 1}`)}
+                          </p>
                         </div>
                       </div>
 
@@ -126,14 +128,16 @@ export function Testimonials() {
                         expandedReview === item.id ? "" : "line-clamp-4"
                       }`}
                     >
-                      {item.comment}
+                      {t(`testimonials.comment.${item.id - 1}`)}
                     </p>
 
                     <button
                       onClick={() => setExpandedReview(expandedReview === item.id ? null : item.id)}
                       className="mt-8 text-lg font-medium text-black/40 transition hover:text-black"
                     >
-                      {expandedReview === item.id ? "Show less" : "Show more"}
+                      {expandedReview === item.id
+                        ? t("testimonials.show_less")
+                        : t("testimonials.show_more")}
                     </button>
                   </div>
                 </SwiperSlide>
