@@ -3,12 +3,12 @@ import { ShieldCheck, Sparkles, Users, Languages, Car, Heart } from "lucide-reac
 import { useTranslate } from "@tolgee/react";
 
 const items = [
-  { key: "safety", Icon: ShieldCheck },
-  { key: "tailor_made", Icon: Sparkles },
-  { key: "languages", Icon: Languages },
-  { key: "comfort", Icon: Car },
-  { key: "private", Icon: Users },
-  { key: "local", Icon: Heart },
+  { key: 0, Icon: ShieldCheck },
+  { key: 1, Icon: Sparkles },
+  { key: 2, Icon: Languages },
+  { key: 3, Icon: Car },
+  { key: 4, Icon: Users },
+  { key: 5, Icon: Heart },
 ] as const;
 
 export function WhyLotus() {
