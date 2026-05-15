@@ -15,8 +15,8 @@ export function Tours() {
             <h2 className="mt-5 font-display text-4xl leading-tight text-foreground text-balance sm:text-5xl">
               {t("tours.title")}
             </h2>
+            <p className="max-w-md text-muted-foreground pt-8">{t("tours.intro")}</p>
           </div>
-          <p className="max-w-md text-muted-foreground">{t("tours.intro")}</p>
         </div>
 
         <div className="mt-16 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
