@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { useTranslate } from "@tolgee/react";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import logo from "@/assets/logo.svg";
+import { TripadvisorIcon } from "./tripadvisorIcon";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -68,11 +69,12 @@ export function Navbar() {
             rel="noopener noreferrer"
             className="rounded-full bg-gold px-5 py-2.5 text-sm font-medium text-gold-foreground shadow-soft transition-transform hover:scale-[1.03]"
           >
-            {t("nav.cta", "Plan your tour")}
+            {t("nav.cta")}
           </a>
+          <TripadvisorIcon />
         </div>
 
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex items-center gap-3 md:hidden">
           <LanguageSwitcher variant={scrolled ? "solid" : "floating"} />
           <button
             aria-label="Open menu"
@@ -81,6 +83,7 @@ export function Navbar() {
           >
             {open ? <X size={26} /> : <Menu size={26} />}
           </button>
+          <TripadvisorIcon />
         </div>
       </div>
 
@@ -103,7 +106,7 @@ export function Navbar() {
               rel="noopener noreferrer"
               className="mt-2 rounded-full bg-gold px-5 py-3 text-center text-sm font-medium text-gold-foreground"
             >
-              {t("nav.cta", "Plan your tour")}
+              {t("nav.cta")}
             </a>
           </div>
         </div>
