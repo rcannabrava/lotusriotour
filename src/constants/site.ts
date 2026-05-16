@@ -6,7 +6,8 @@ export const SITE = {
   whatsappUrl: "https://wa.me/5521971577557",
   instagram: "https://www.instagram.com/lotusriotour",
   facebook: "https://www.facebook.com/lotusturismoeeventos",
-  languages: ["Portuguese", "English", "Spanish"],
+  tripadvisor:
+    "https://www.tripadvisor.com/Attraction_Review-g303506-d19921867-Reviews-Lotus_Rio_Tour-Rio_de_Janeiro_State_of_Rio_de_Janeiro.html",
 } as const;
 
 export const NAV_LINKS = [
