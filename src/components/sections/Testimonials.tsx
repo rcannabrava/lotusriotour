@@ -66,10 +66,10 @@ export function Testimonials() {
                 enabled: true,
                 momentum: true,
                 momentumRatio: 0.35,
-                momentumVelocityRatio: 0.8,
+                momentumVelocityRatio: 0.5,
               }}
               autoplay={{
-                delay: 3500,
+                delay: 8000,
                 disableOnInteraction: false,
                 pauseOnMouseEnter: true,
               }}
