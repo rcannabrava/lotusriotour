@@ -3,7 +3,7 @@ import { Check, ChevronDown, Globe } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslate } from "@tolgee/react";
 import { LANGUAGES, type Lang } from "@/i18n/languages";
-import { useLanguage } from "@/i18n/LanguageProvider";
+import { useLanguage } from "@/i18n/languages";
 import { cn } from "@/lib/utils";
 
 type Props = {
