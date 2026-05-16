@@ -13,17 +13,20 @@ import { CTA } from "@/components/sections/CTA";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Lotus Rio Tour" },
+      { title: "Luxury Private Tours in Rio | Lotus Rio Tour" },
       {
         name: "description",
         content:
-          "Bespoke private tours of Rio de Janeiro by Patricia Cannabrava. Christ the Redeemer, Sugarloaf, helicopter, boat and tailor-made experiences in English, Spanish and Portuguese.",
+          "Private luxury tours and bespoke experiences in Rio de Janeiro with Patricia Cannabrava. Discover Christ the Redeemer, Sugarloaf, beaches, yachts and exclusive tailor-made itineraries in English, Spanish and Portuguese.",
       },
-      { property: "og:title", content: "Lotus Rio Tour" },
+      {
+        property: "og:title",
+        content: "Luxury Private Tours in Rio | Lotus Rio Tour",
+      },
       {
         property: "og:description",
         content:
-          "Private, unhurried days in Rio designed around you. 10+ years guiding international travelers.",
+          "Private, elegant and unhurried experiences in Rio de Janeiro designed entirely around you.",
       },
       { property: "og:type", content: "website" },
       {

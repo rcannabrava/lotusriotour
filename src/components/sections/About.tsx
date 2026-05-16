@@ -28,7 +28,7 @@ export function About() {
               loading="lazy"
               width={1280}
               height={1600}
-              className="aspect-[4/5] w-full rounded-2xl object-cover shadow-elegant"
+              className="aspect-4/5 w-full rounded-2xl object-cover shadow-elegant"
             />
             <div className="absolute -bottom-8 -right-6 hidden rounded-2xl bg-card p-6 shadow-elegant ring-1 ring-border lg:block">
               <p className="font-display text-2xl text-foreground">{SITE.guide}</p>
