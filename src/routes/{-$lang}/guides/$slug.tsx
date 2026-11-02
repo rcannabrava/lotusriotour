@@ -190,7 +190,7 @@ function GuidePage() {
         <Section tone="soft" width="6xl" className="lg:py-32">
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-5">
-              <SectionHeader eyebrow="FAQ" title={d.guides.faqTitle} />
+              <SectionHeader eyebrow={d.faq.eyebrow} title={d.guides.faqTitle} />
             </div>
             <div className="lg:col-span-7">
               <FaqAccordion items={guide.faq} />
