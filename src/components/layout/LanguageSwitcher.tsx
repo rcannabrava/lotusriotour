@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Check, ChevronDown, Globe } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Link, useLocation } from "@tanstack/react-router";
-import { LOCALES, localizedPath, stripLocale, useI18n, type Locale } from "@/i18n";
+import { useLocation } from "@tanstack/react-router";
+import { LOCALES, stripLocale, useI18n, type Locale } from "@/i18n";
+import { LocalLink } from "@/components/ui/LocalLink";
 import { guideLocales } from "@/lib/guides";
 import { cn } from "@/lib/utils";
 
@@ -80,8 +81,9 @@ export function LanguageSwitcher({ variant = "floating", className }: Props) {
               const active = l.code === locale;
               return (
                 <li key={l.code}>
-                  <Link
-                    to={localizedPath(l.code, targetPath(l.code)) as never}
+                  <LocalLink
+                    to={targetPath(l.code)}
+                    locale={l.code}
                     hrefLang={l.htmlLang}
                     role="option"
                     aria-selected={active}
@@ -105,7 +107,7 @@ export function LanguageSwitcher({ variant = "floating", className }: Props) {
                       </span>
                     </span>
                     {active && <Check size={14} className="text-gold" aria-hidden />}
-                  </Link>
+                  </LocalLink>
                 </li>
               );
             })}
