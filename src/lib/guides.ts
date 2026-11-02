@@ -145,15 +145,20 @@ export function guideLocales(slug: string): Locale[] {
 /** Guides that can appear in the sitemap (never drafts), with their locales. */
 export function getSitemapGuides() {
   const slugs = [...new Set(loaded.guides.map((g) => g.slug))];
+  const now = today();
   return slugs
     .map((slug) => {
-      const locales = LOCALES.map((l) => l.code).filter((code) => {
-        const g = loaded.guides.find((x) => x.slug === slug && x.locale === code);
-        return g && g.status === "published" && g.date <= today();
-      });
-      const lastmod = loaded.guides
-        .filter((g) => g.slug === slug)
+      const published = loaded.guides.filter(
+        (g) => g.slug === slug && g.status === "published" && g.date <= now,
+      );
+      const locales = LOCALES.map((l) => l.code).filter((code) =>
+        published.some((g) => g.locale === code),
+      );
+      // only public versions count: a draft or a translation scheduled later must not
+      // advertise a future date for the pages that are already live
+      const lastmod = published
         .map((g) => g.updated ?? g.date)
+        .filter((date) => date <= now)
         .sort()
         .pop();
       return { slug, locales, lastmod };

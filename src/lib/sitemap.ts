@@ -6,13 +6,15 @@ import { absoluteUrl } from "./seo";
 export type SitePage = {
   /** Locale-agnostic path */
   path: string;
-  /** ISO date (YYYY-MM-DD) */
+  /**
+   * ISO date (YYYY-MM-DD) of the last real content change. Only set when it is known
+   * (guides): a wrong or ever-changing lastmod makes Google ignore lastmod for the whole site,
+   * so static pages omit it rather than use a build or request time.
+   */
   lastmod?: string;
   /** Locales in which the page exists (defaults to all) */
   locales?: readonly Locale[];
 };
-
-const BUILD_DATE = new Date().toISOString().slice(0, 10);
 
 export function getSitePages(): SitePage[] {
   const guides = getSitemapGuides();
@@ -24,7 +26,7 @@ export function getSitePages(): SitePage[] {
     { path: "/about" },
     ...(guides.length ? [{ path: "/guides", locales: guideIndexLocales }] : []),
     ...guides.map((g) => ({ path: `/guides/${g.slug}`, locales: g.locales, lastmod: g.lastmod })),
-  ].map((page) => ({ lastmod: BUILD_DATE, ...page }));
+  ];
 }
 
 /** sitemap.xml with xhtml:link hreflang alternates, so each language version points to the others. */

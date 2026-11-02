@@ -24,6 +24,13 @@ describe("sitemap", () => {
     expect(xml).toContain('hreflang="x-default" href="https://lotusriotour.com/tours"');
   });
 
+  it("omits lastmod on pages without a known content date", () => {
+    // a build or request time is not a modification date (on Workers it would even be 1970)
+    const staticPages = getSitePages().filter((p) => !p.path.startsWith("/guides/"));
+    expect(staticPages.filter((p) => p.lastmod !== undefined)).toEqual([]);
+    expect(xml).not.toContain("<lastmod>1970");
+  });
+
   it("never lists the redundant /en prefix", () => {
     expect(xml).not.toContain("lotusriotour.com/en");
   });
