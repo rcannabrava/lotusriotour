@@ -10,7 +10,7 @@ Thank you for considering contributing to Lotus Rio Tour.
 - Vite
 - Tailwind CSS
 - Cloudflare Workers
-- Tolgee
+- Typed i18n dictionaries (`src/i18n/locales`)
 
 ## Prerequisites
 
@@ -60,8 +60,8 @@ Examples:
 
 ```bash
 feat: add testimonials section
-fix: correct language detection bug
-refactor: simplify translation setup
+fix: correct hreflang for pt-br pages
+refactor: simplify tour page layout
 docs: update README
 style: improve mobile spacing
 ```
@@ -70,19 +70,19 @@ style: improve mobile spacing
 
 ```txt
 src/
-├── components/
-├── routes/
-├── lib/
-├── styles/
+├── components/   # layout, sections, ui (design-system primitives)
+├── i18n/         # locales and typed dictionaries
+├── routes/       # pages under {-$lang}/
+├── lib/          # seo, schema, sitemap, analytics
 ├── assets/
 └── server.ts
 ```
 
 ## Pull Requests
 
-Before opening a PR:
+Before opening a PR (read [DESIGN.md](../DESIGN.md) if you touch UI):
 
-- Make sure the project builds successfully
+- Run `npm run typecheck && npm run lint && npm run test && npm run build`
 - Avoid unnecessary commits
 - Keep the code consistent with the current style
 - Test your changes locally

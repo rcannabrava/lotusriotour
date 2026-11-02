@@ -17,9 +17,10 @@ Patricia has been guiding tourists from all over the world for more than 10 year
 - TanStack Query for async state management
 - Tailwind CSS v4 for styling
 - Framer Motion for animations
-- Tolgee for internationalization (PT-BR, EN, ES)
+- Typed i18n dictionaries (EN, PT-BR, ES) with language-prefixed URLs
 - Swiper for the testimonials carousel
-- SEO metadata, Open Graph, and Twitter Cards configured per route through TanStack Router (`head()`)
+- SEO: per-route metadata, canonical + hreflang, Open Graph, JSON-LD (schema.org), generated `sitemap.xml` and `llms.txt`
+- GA4 with Consent Mode v2 (optional, via `VITE_GA_ID`)
 - Cloudflare Workers as the production runtime
 - Vite as the bundler
 
@@ -29,14 +30,17 @@ Patricia has been guiding tourists from all over the world for more than 10 year
 src/
   assets/          # Images and SVGs
   components/
-    layout/        # Navbar, Footer, WhatsApp float button, LanguageSwitcher
+    layout/        # Navbar, Footer, WhatsApp float button, LanguageSwitcher, CookieBanner
     sections/      # Hero, About, Tours, WhyLotus, Testimonials, FAQ, CTA
-  constants/       # Site constants (name, links, WhatsApp)
-  data/            # Tours, testimonials, and FAQ data
-  i18n/            # Tolgee configuration and language list
-  lib/             # Utilities and error handling
-  routes/          # Pages (file-based via TanStack Router)
+    ui/            # Design-system primitives (Section, buttons, LocalLink, WhatsAppLink...)
+  constants/       # Site constants (name, links, WhatsApp, verified facts)
+  data/            # Tours and testimonials metadata
+  i18n/            # Locales config and typed dictionaries (locales/en|pt-br|es.ts)
+  lib/             # SEO helpers, schema.ts (JSON-LD), sitemap, llms.txt, analytics
+  routes/          # Pages under {-$lang}/ (file-based via TanStack Router)
   tests/           # Unit tests with Vitest
+scripts/           # optimize-images.mjs (npm run images)
+DESIGN.md          # Visual system, read before building UI
 ```
 
 ## Installation
@@ -86,13 +90,15 @@ The project uses Husky with lint-staged to automatically run linting and formatt
 
 ## Supported languages
 
-| Code  | Language   |
-| ----- | ---------- |
-| en    | English    |
-| pt-BR | Portuguese |
-| es-ES | Spanish    |
+| URL prefix | Language   |
+| ---------- | ---------- |
+| _(none)_   | English    |
+| `/pt-br`   | Portuguese |
+| `/es`      | Spanish    |
 
-The language is automatically detected by the browser and stored using Tolgee's `LanguageStorage`. Users can also switch languages through the navbar selector.
+Each language has its own URL (`/tours/boat`, `/pt-br/tours/boat`, `/es/tours/boat`) so search engines index them separately, linked by `hreflang`. English is the default and has no prefix (`/en/...` redirects to `/...`). There is no automatic redirect by browser language. Visitors switch with the navbar selector.
+
+Strings live in `src/i18n/locales/`. `en.ts` defines the type; `pt-br.ts` and `es.ts` must have the same shape (TypeScript and tests enforce it).
 
 ## Available tours
 
@@ -103,11 +109,27 @@ The language is automatically detected by the browser and stored using Tolgee's 
 - Brazilian Passions (Carnival Experience and Maracanã)
 - Boat Tour
 
-Each tour includes a title, location, duration, and description managed through i18n.
+Each tour has its own page (`/tours/<id>`) with summary, highlights, inclusions, FAQ and structured data. Copy lives in the dictionaries; photos and facts in `src/data/tours.ts`.
 
 ## Direct contact
 
 All call-to-action buttons on the website redirect users to [Patricia's WhatsApp](https://wa.me/5521971577557)
+
+## SEO / GEO / AEO
+
+- Every page renders its content on the server (no empty shell), so crawlers and AI bots can read it.
+- `buildHead()` (`src/lib/seo.ts`) generates title, description, canonical, hreflang, Open Graph and Twitter tags.
+- `src/lib/schema.ts` builds JSON-LD: `TravelAgency`/`LocalBusiness`, `Person`, `WebSite`, `FAQPage`, `TouristTrip`, `BreadcrumbList`.
+- `/sitemap.xml` and `/llms.txt` are generated from the same data. `public/robots.txt` explicitly allows search and AI crawlers.
+- Facts that are not confirmed (Tripadvisor rating/count, Google Business Profile URL, Cadastur number, prices) are left empty in `src/constants/site.ts` and `src/data/tours.ts`. They only appear in structured data once filled in.
+
+## Analytics
+
+Set `VITE_GA_ID` (GA4 measurement ID) to enable analytics. It loads with Consent Mode v2 (storage denied until the visitor accepts the cookie banner) and records a `whatsapp_click` event with `placement`, `tour` and `locale`. Without the variable nothing is loaded.
+
+## Images
+
+Put originals in `src/assets/`, list them in `scripts/optimize-images.mjs`, then run `npm run images` to generate the responsive WebP files and the 1200x630 social previews.
 
 ## Commit conventions
 
