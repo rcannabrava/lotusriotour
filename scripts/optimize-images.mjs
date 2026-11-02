@@ -3,8 +3,8 @@
 //
 // - src/assets/optimized/<name>-<width>.webp  responsive variants (see ResponsiveImage)
 // - public/og/<name>.jpg                      1200x630 social previews (under ~250 KB, WhatsApp limit is ~300 KB)
-// - public/og-image.jpg                       branded default preview, re-encoded in place (design file stays the source of truth)
-import { mkdir, readFile, stat } from "node:fs/promises";
+// - public/og-image.jpg                       branded default preview, generated from src/assets/brand/og-image.png (lossless design source)
+import { mkdir, stat } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 
@@ -33,11 +33,12 @@ const social = {
   "public/og/boat.jpg": "tour-boat",
 };
 
-// The branded og-image is a design (logo + tagline): only re-encode it, never replace it with a photo crop.
-async function compress(buffer, file) {
+// The branded og-image is a design (logo + tagline): always encode from the lossless source,
+// never from the previous JPEG, so repeated runs do not accumulate compression artifacts.
+async function compress(source, file) {
   let quality = 82;
   do {
-    await sharp(buffer)
+    await sharp(source)
       .resize(1200, 630, { fit: "cover" })
       .jpeg({ quality, mozjpeg: true })
       .toFile(file);
@@ -62,7 +63,7 @@ for (const [name, widths] of Object.entries(responsive)) {
   }
 }
 
-await compress(await readFile("public/og-image.jpg"), "public/og-image.jpg");
+await compress("src/assets/brand/og-image.png", "public/og-image.jpg");
 console.log("public/og-image.jpg", await kb("public/og-image.jpg"));
 
 for (const [file, name] of Object.entries(social)) {
