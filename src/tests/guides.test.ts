@@ -65,6 +65,17 @@ See [Rio Express](/tours/rio-express).
     expect(guide.html).toContain('<h2 id="first-section">');
   });
 
+  it("escapes link attributes and treats //host as external", () => {
+    const body = valid.replace(
+      "See [Rio Express](/tours/rio-express).",
+      'A [map](https://x.com "Rio \\"best\\" spots") and [site](//example.com).',
+    );
+    const { html } = parseGuide("/content/guides/demo/pt-br.md", body);
+    expect(html).toContain('title="Rio &quot;best&quot; spots"');
+    expect(html).toContain('href="//example.com" target="_blank" rel="noopener noreferrer"');
+    expect(html).not.toContain("/pt-br//example.com");
+  });
+
   it("rejects a description that is too long", () => {
     const long = valid.replace(/description: ".*"/, `description: "${"x".repeat(170)}"`);
     expect(() => parseGuide("/content/guides/demo/en.md", long)).toThrow();

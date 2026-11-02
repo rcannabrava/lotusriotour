@@ -49,6 +49,14 @@ export function slugify(text: string): string {
     .replace(/^-|-$/g, "");
 }
 
+function escapeAttr(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 function renderer(locale: Locale) {
   return new Marked({
     renderer: {
@@ -59,13 +67,15 @@ function renderer(locale: Locale) {
       },
       link({ href, title, tokens }) {
         const text = this.parser.parseInline(tokens);
-        const titleAttr = title ? ` title="${title}"` : "";
-        if (href.startsWith("/")) {
+        const titleAttr = title ? ` title="${escapeAttr(title)}"` : "";
+        // "/path" is internal; "//host" is protocol-relative, i.e. external
+        if (href.startsWith("/") && !href.startsWith("//")) {
           const [path, hash] = href.split("#");
           const url = localizedPath(locale, path) + (hash ? `#${hash}` : "");
-          return `<a href="${url}"${titleAttr}>${text}</a>`;
+          return `<a href="${escapeAttr(url)}"${titleAttr}>${text}</a>`;
         }
-        return `<a href="${href}"${titleAttr} target="_blank" rel="noopener noreferrer">${text}</a>`;
+        if (href.startsWith("#")) return `<a href="${escapeAttr(href)}"${titleAttr}>${text}</a>`;
+        return `<a href="${escapeAttr(href)}"${titleAttr} target="_blank" rel="noopener noreferrer">${text}</a>`;
       },
     },
   });
