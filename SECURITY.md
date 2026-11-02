@@ -21,7 +21,7 @@ Out of scope today: CSRF, rate limiting, custom WAF rules, CAPTCHA, authenticati
 
 Two places set them:
 
-- **Pages** (everything rendered by the Worker): [`src/lib/security-headers.ts`](src/lib/security-headers.ts), applied to every response in [`src/server.ts`](src/server.ts), error pages included. Tested in [`src/tests/security-headers.test.ts`](src/tests/security-headers.test.ts).
+- **Pages** (everything rendered by the Worker): [`src/lib/security/security-headers.ts`](src/lib/security/security-headers.ts), applied to every response in [`src/server.ts`](src/server.ts), error pages included. Tested in [`src/tests/security/security-headers.test.ts`](src/tests/security/security-headers.test.ts).
 - **Static files** (JS, CSS, images, favicon), which Cloudflare serves without running the Worker: [`public/_headers`](public/_headers).
 
 | Header                       | Value                                             | Why                                               |
@@ -66,10 +66,10 @@ Everything else is `'self'` or `'none'` (`object-src`, `frame-ancestors`), and `
 
 - **`VITE_*` variables are public.** Vite inlines them into the browser bundle. Never put a token, key or password in one. Today there are only `VITE_GA_ID` and `VITE_SHOW_DRAFTS`, and both are fine to expose. Real secrets go in Worker secrets (`wrangler secret put`) and are read on the server only.
 - **Guides are trusted HTML.** Markdown in `content/guides/` is rendered with `marked` and injected with `dangerouslySetInnerHTML` ([`src/routes/{-$lang}/guides/$slug.tsx`](src/routes/{-$lang}/guides/$slug.tsx)). `marked` does not sanitize. This is safe only because the content comes from this repository and goes through review. Never render Markdown or HTML from any other source (CMS, form, API, AI output not reviewed) without sanitizing it with DOMPurify first.
-- **No other `dangerouslySetInnerHTML`.** JSON-LD goes through `buildHead()` in `src/lib/seo.ts`, which serializes it with `JSON.stringify`.
+- **No other `dangerouslySetInnerHTML`.** JSON-LD goes through `buildHead()` in `src/lib/seo/seo.ts`, which serializes it with `JSON.stringify`.
 - **External links** open with `target="_blank"` and always `rel="noopener noreferrer"`. `WhatsAppLink` and the guide renderer already do this.
 - **Error pages never leak details.** `src/server.ts` logs the real error to the Worker logs and returns the generic branded page. Keep it that way.
-- **Analytics only after consent.** GA4 loads with Consent Mode v2 and `analytics_storage: denied` until the visitor accepts the cookie banner (`src/lib/analytics.ts`). Don't add trackers that bypass it.
+- **Analytics only after consent.** GA4 loads with Consent Mode v2 and `analytics_storage: denied` until the visitor accepts the cookie banner (`src/lib/analytics/analytics.ts`). Don't add trackers that bypass it.
 
 ## 5. Accounts and infrastructure (manual)
 
