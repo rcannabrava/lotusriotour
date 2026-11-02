@@ -1,0 +1,6 @@
+# Static assets skip src/server.ts, so they get their security headers here.
+# HTML pages get the full set (including CSP) from src/lib/security-headers.ts.
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
