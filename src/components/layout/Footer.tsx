@@ -1,17 +1,14 @@
 import { Instagram, Facebook, MessageCircle } from "lucide-react";
 import { SITE } from "@/constants/site";
-import { useTranslate } from "@tolgee/react";
+import { useI18n } from "@/i18n";
+import { LocalLink } from "@/components/ui/LocalLink";
+import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
 import logo from "@/assets/logo.svg";
+import { useNavLinks } from "./useNavLinks";
 
 export function Footer() {
-  const { t } = useTranslate();
-  const links = [
-    { label: t("nav.about"), href: "#about" },
-    { label: t("nav.tours"), href: "#tours" },
-    { label: t("nav.why"), href: "#why" },
-    { label: t("nav.reviews"), href: "#reviews" },
-    { label: t("nav.faq"), href: "#faq" },
-  ];
+  const { d } = useI18n();
+  const links = useNavLinks();
   return (
     <footer className="bg-[oklch(0.14_0.03_215)] text-white/80">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 lg:grid-cols-12 lg:px-10">
@@ -19,9 +16,7 @@ export function Footer() {
           <div className="font-display text-2xl text-white">
             <img src={logo} alt="Lotus Rio Tour" className="h-20 w-auto inline-block mb-1" />{" "}
           </div>
-          <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/65">
-            {t("footer.tagline")}
-          </p>
+          <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/65">{d.footer.tagline}</p>
           <div className="mt-8 flex items-center gap-3">
             <SocialLink href={SITE.instagram} label="Instagram">
               <Instagram size={16} />
@@ -36,33 +31,28 @@ export function Footer() {
         </div>
 
         <div className="lg:col-span-3">
-          <h4 className="text-xs uppercase tracking-widest text-gold">{t("footer.explore")}</h4>
+          <h4 className="text-xs uppercase tracking-widest text-gold">{d.footer.explore}</h4>
           <ul className="mt-5 space-y-3 text-sm">
             {links.map((l) => (
-              <li key={l.href}>
-                <a href={l.href} className="hover:text-gold">
+              <li key={l.to}>
+                <LocalLink to={l.to} className="hover:text-gold">
                   {l.label}
-                </a>
+                </LocalLink>
               </li>
             ))}
           </ul>
         </div>
 
         <div className="lg:col-span-4">
-          <h4 className="text-xs uppercase tracking-widest text-gold">{t("footer.contact")}</h4>
+          <h4 className="text-xs uppercase tracking-widest text-gold">{d.footer.contact}</h4>
           <ul className="mt-5 space-y-3 text-sm text-white/70">
             <li>
-              <a
-                href={SITE.whatsappUrl}
-                className="hover:text-gold"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <WhatsAppLink placement="footer" className="hover:text-gold">
                 +55 21 97157 7557
-              </a>
+              </WhatsAppLink>
             </li>
             <li>
-              {t("footer.languagesLabel")}: {t("site.languages")}
+              {d.footer.languagesLabel}: {d.site.languages}
             </li>
           </ul>
         </div>
@@ -71,9 +61,9 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 py-6 text-xs text-white/50 sm:flex-row lg:px-10">
           <p>
-            © {new Date().getFullYear()} {SITE.name}. {t("footer.rights")}
+            © {new Date().getFullYear()} {SITE.name}. {d.footer.rights}
           </p>
-          <p>{t("footer.crafted")}</p>
+          <p>{d.footer.crafted}</p>
         </div>
       </div>
     </footer>

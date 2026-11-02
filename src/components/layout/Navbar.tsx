@@ -1,21 +1,23 @@
-import { Link, useLocation } from "@tanstack/react-router";
+import { useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { SITE } from "@/constants/site";
 import { cn } from "@/lib/utils";
-import { useTranslate } from "@tolgee/react";
+import { useI18n } from "@/i18n";
+import { LocalLink } from "@/components/ui/LocalLink";
+import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import logo from "@/assets/logo.svg";
 import { TripadvisorIcon } from "./tripadvisorIcon";
+import { useNavLinks } from "./useNavLinks";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const { t } = useTranslate();
+  const { d, href } = useI18n();
 
   const location = useLocation();
 
-  const isHome = location.pathname === "/";
+  const isHome = location.pathname.replace(/\/$/, "") === href("/").replace(/\/$/, "");
 
   const navTextColor = !isHome || scrolled ? "text-foreground" : "text-white";
 
@@ -26,13 +28,7 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const links = [
-    { label: t("nav.about"), href: "/#about" },
-    { label: t("nav.tours"), href: "/tours" },
-    { label: t("nav.why"), href: "/#why" },
-    { label: t("nav.reviews"), href: "/#reviews" },
-    { label: t("nav.faq"), href: "#faq" },
-  ];
+  const links = useNavLinks();
 
   return (
     <header
@@ -42,7 +38,7 @@ export function Navbar() {
       )}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
-        <Link
+        <LocalLink
           to="/"
           className={cn(
             "font-display text-xl tracking-tight transition-colors",
@@ -51,12 +47,12 @@ export function Navbar() {
           )}
         >
           <img src={logo} alt="Lotus Rio Tour" className="h-20 w-20 sm:w-auto" />
-        </Link>
+        </LocalLink>
         <nav className="hidden items-center gap-9 px-3 md:flex">
           {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
+            <LocalLink
+              key={link.to}
+              to={link.to}
               className={cn(
                 "text-sm transition-colors hover:text-gold",
                 scrolled ? "text-foreground/80" : "text-white/85",
@@ -64,27 +60,25 @@ export function Navbar() {
               )}
             >
               {link.label}
-            </a>
+            </LocalLink>
           ))}
         </nav>
 
         <div className="hidden items-center gap-3 md:flex">
           <LanguageSwitcher variant={scrolled ? "solid" : "floating"} />
-          <a
-            href={SITE.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <WhatsAppLink
+            placement="navbar"
             className="rounded-full bg-gold px-5 py-2.5 text-sm font-medium text-gold-foreground shadow-soft transition-transform hover:scale-[1.03]"
           >
-            {t("nav.cta")}
-          </a>
+            {d.nav.cta}
+          </WhatsAppLink>
           <TripadvisorIcon />
         </div>
 
         <div className="flex items-center gap-3 md:hidden">
           <LanguageSwitcher variant={scrolled ? "solid" : "floating"} />
           <button
-            aria-label="Open menu"
+            aria-label={d.common.openMenu}
             onClick={() => setOpen((v) => !v)}
             className={cn(scrolled ? "text-foreground" : "text-white")}
           >
@@ -98,23 +92,21 @@ export function Navbar() {
         <div className="border-t border-border/60 bg-background/95 backdrop-blur-xl md:hidden">
           <div className="mx-auto flex max-w-7xl flex-col gap-2 px-6 py-6">
             {links.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
+              <LocalLink
+                key={link.to}
+                to={link.to}
                 onClick={() => setOpen(false)}
                 className="rounded-md px-3 py-3 text-base text-foreground/85 hover:bg-secondary"
               >
                 {link.label}
-              </a>
+              </LocalLink>
             ))}
-            <a
-              href={SITE.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <WhatsAppLink
+              placement="navbar"
               className="mt-2 rounded-full bg-gold px-5 py-3 text-center text-sm font-medium text-gold-foreground"
             >
-              {t("nav.cta")}
-            </a>
+              {d.nav.cta}
+            </WhatsAppLink>
           </div>
         </div>
       )}

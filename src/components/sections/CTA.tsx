@@ -1,15 +1,17 @@
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
-import heroImg from "@/assets/hero-rio.jpg";
-import { SITE } from "@/constants/site";
-import { useTranslate } from "@tolgee/react";
+import { useI18n } from "@/i18n";
+import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
+import { buttonStyles } from "@/components/ui/button-styles";
+import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 
 export function CTA() {
-  const { t } = useTranslate();
+  const { d } = useI18n();
   return (
     <section className="relative overflow-hidden">
-      <img
-        src={heroImg}
+      <ResponsiveImage
+        name="hero-rio"
+        sizes="100vw"
         alt=""
         aria-hidden
         loading="lazy"
@@ -23,23 +25,16 @@ export function CTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <span className="eyebrow text-gold">{t("cta.eyebrow")}</span>
+          <span className="eyebrow text-gold">{d.cta.eyebrow}</span>
           <h2 className="mt-6 font-display text-4xl leading-[1.1] text-balance sm:text-6xl">
-            {t("cta.title")}
+            {d.cta.title}
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-white/80">{t("cta.intro")}</p>
-          <a
-            href={SITE.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-10 inline-flex items-center gap-3 rounded-full bg-gold px-8 py-4 text-sm font-medium text-gold-foreground shadow-elegant transition-transform hover:scale-[1.03]"
-          >
+          <p className="mx-auto mt-6 max-w-xl text-white/80">{d.cta.intro}</p>
+          <WhatsAppLink placement="cta" className={buttonStyles("primary", "mt-10 gap-3 px-8")}>
             <MessageCircle size={18} />
-            {t("cta.button")}
-          </a>
-          <p className="mt-5 text-xs uppercase tracking-widest text-white/55">
-            {t("cta.footnote")}
-          </p>
+            {d.cta.button}
+          </WhatsAppLink>
+          <p className="mt-5 text-xs uppercase tracking-widest text-white/55">{d.cta.footnote}</p>
         </motion.div>
       </div>
     </section>

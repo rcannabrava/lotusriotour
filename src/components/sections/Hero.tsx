@@ -1,19 +1,22 @@
-// Hero section — fully translated via i18n
 import { motion } from "framer-motion";
 import { ArrowDown, MapPin } from "lucide-react";
-import heroImg from "@/assets/hero-rio.jpg";
-import { SITE } from "@/constants/site";
-import { useTranslate } from "@tolgee/react";
+import { useI18n } from "@/i18n";
+import { LocalLink } from "@/components/ui/LocalLink";
+import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
+import { buttonStyles } from "@/components/ui/button-styles";
+import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
 
 export function Hero() {
-  const { t } = useTranslate();
+  const { d } = useI18n();
   return (
     <section className="relative h-svh min-h-160 w-full overflow-hidden">
-      <img
-        src={heroImg}
-        alt="Aerial view of Rio de Janeiro at sunset with Christ the Redeemer"
+      <ResponsiveImage
+        name="hero-rio"
+        sizes="100vw"
+        alt={d.hero.imageAlt}
         width={1920}
         height={1080}
+        fetchPriority="high"
         className="absolute inset-0 h-full w-full object-cover"
       />
       <div className="absolute inset-0 gradient-hero-overlay" />
@@ -27,33 +30,25 @@ export function Hero() {
           className="max-w-3xl"
         >
           <span className="eyebrow inline-flex items-center gap-2 text-white">
-            <MapPin size={14} /> {t("hero.eyebrow")}
+            <MapPin size={14} /> {d.hero.eyebrow}
           </span>
           <h1 className="mt-6 font-display text-5xl leading-[1.05] text-white text-balance sm:text-6xl lg:text-7xl [@media(max-height:710px)]:mt-2">
-            {t("hero.titleLine1")}
+            {d.hero.titleLine1}
             <br />
-            <span className="italic text-gold">{t("hero.titleLine2")}</span>
+            <span className="italic text-gold">{d.hero.titleLine2}</span>
           </h1>
           <p className="mt-6 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">
-            {t("hero.description")}
+            {d.hero.description}
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
-            <a
-              href={SITE.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2 rounded-full bg-gold px-7 py-4 text-sm font-medium text-gold-foreground shadow-elegant transition-transform hover:scale-[1.03]"
-            >
-              {t("hero.ctaPrimary")}
+            <WhatsAppLink placement="hero" className={buttonStyles("primary")}>
+              {d.hero.ctaPrimary}
               <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
-            </a>
-            <a
-              href="#tours"
-              className="inline-flex items-center gap-2 rounded-full border border-white/30 px-7 py-4 text-sm font-medium text-white backdrop-blur-md transition-colors hover:bg-white/10"
-            >
-              {t("hero.ctaSecondary")}
-            </a>
+            </WhatsAppLink>
+            <LocalLink to="/#tours" className={buttonStyles("ghost")}>
+              {d.hero.ctaSecondary}
+            </LocalLink>
           </div>
         </motion.div>
 
@@ -65,7 +60,7 @@ export function Hero() {
           className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-white/70 lg:flex"
           aria-label="Scroll down"
         >
-          <span className="text-[10px] tracking-[0.4em]">{t("hero.scroll")}</span>
+          <span className="text-[10px] tracking-[0.4em]">{d.hero.scroll}</span>
           <ArrowDown size={16} className="animate-bounce" />
         </motion.a>
       </div>
