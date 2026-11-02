@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { DEFAULT_LOCALE, isLocale, localizedPath } from "@/i18n/config";
+import { DEFAULT_LOCALE, LOCALES, isLocale, localizedPath } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { useI18n } from "@/i18n";
 import { getGuides } from "@/lib/guides";
@@ -20,6 +20,8 @@ export const Route = createFileRoute("/{-$lang}/guides/")({
       description: d.seo.guides.description,
       // an empty index is not worth indexing
       noindex: guides.length === 0,
+      // hreflang only to languages that have guides (an empty index is noindex, an invalid alternate)
+      locales: LOCALES.map((l) => l.code).filter((code) => getGuides(code).length > 0),
       jsonLd: [
         ...entityGraph(locale),
         breadcrumbList(locale, [
