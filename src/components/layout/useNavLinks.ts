@@ -1,5 +1,5 @@
 import { useI18n } from "@/i18n";
-import { getGuides } from "@/lib/guides";
+import { getGuides } from "@/lib/content/guides";
 
 /** Main navigation, shared by the Navbar and the Footer. "Guides" appears once a guide is published. */
 export function useNavLinks() {

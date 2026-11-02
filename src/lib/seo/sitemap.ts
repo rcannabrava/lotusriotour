@@ -1,6 +1,6 @@
 import { LOCALES, localizedPath, type Locale } from "@/i18n/config";
 import { tours } from "@/data/tours";
-import { getSitemapGuides } from "./guides";
+import { getSitemapGuides } from "@/lib/content/guides";
 import { absoluteUrl } from "./seo";
 
 export type SitePage = {

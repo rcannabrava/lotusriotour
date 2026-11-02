@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useI18n } from "@/i18n";
-import { getStoredConsent, isAnalyticsEnabled, setConsent } from "@/lib/analytics";
+import { getStoredConsent, isAnalyticsEnabled, setConsent } from "@/lib/analytics/analytics";
 import { buttonStyles } from "@/components/ui/button-styles";
 
 /** Consent Mode banner. Renders only when analytics is configured and the visitor has not chosen yet. */

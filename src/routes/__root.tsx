@@ -12,7 +12,7 @@ import { useEffect } from "react";
 import appCss from "../styles.css?url";
 import { DEFAULT_LOCALE, getLocaleMeta, isLocale } from "@/i18n/config";
 import { CookieBanner } from "@/components/layout/CookieBanner";
-import { initAnalytics } from "@/lib/analytics";
+import { initAnalytics } from "@/lib/analytics/analytics";
 
 function NotFoundComponent() {
   return (

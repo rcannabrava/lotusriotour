@@ -9,8 +9,8 @@ import { LatestGuides } from "@/components/sections/LatestGuides";
 import { CTA } from "@/components/sections/CTA";
 import { DEFAULT_LOCALE, isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { buildHead } from "@/lib/seo";
-import { entityGraph, faqPage } from "@/lib/schema";
+import { buildHead } from "@/lib/seo/seo";
+import { entityGraph, faqPage } from "@/lib/seo/schema";
 
 export const Route = createFileRoute("/{-$lang}/")({
   head: ({ params }) => {

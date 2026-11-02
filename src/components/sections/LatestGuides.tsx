@@ -1,5 +1,5 @@
 import { useI18n } from "@/i18n";
-import { getGuides } from "@/lib/guides";
+import { getGuides } from "@/lib/content/guides";
 import { GuideCard } from "@/components/ui/GuideCard";
 import { LocalLink } from "@/components/ui/LocalLink";
 import { Section, SectionHeader } from "@/components/ui/Section";

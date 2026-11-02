@@ -2,9 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { DEFAULT_LOCALE, LOCALES, isLocale, localizedPath } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { useI18n } from "@/i18n";
-import { getGuides } from "@/lib/guides";
-import { absoluteUrl, buildHead } from "@/lib/seo";
-import { breadcrumbList, entityGraph } from "@/lib/schema";
+import { getGuides } from "@/lib/content/guides";
+import { absoluteUrl, buildHead } from "@/lib/seo/seo";
+import { breadcrumbList, entityGraph } from "@/lib/seo/schema";
 import { GuideCard } from "@/components/ui/GuideCard";
 import { Section, SectionHeader } from "@/components/ui/Section";
 

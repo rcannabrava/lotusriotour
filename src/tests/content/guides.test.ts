@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { allGuideFiles, guideLoadErrors, parseGuide, slugify } from "@/lib/guides";
+import { allGuideFiles, guideLoadErrors, parseGuide, slugify } from "@/lib/content/guides";
 import { tours } from "@/data/tours";
 
 // Every file in content/guides is validated here, so CI fails on a broken guide before it reaches the site.

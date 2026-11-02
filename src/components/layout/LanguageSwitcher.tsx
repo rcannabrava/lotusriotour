@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useLocation } from "@tanstack/react-router";
 import { LOCALES, stripLocale, useI18n, type Locale } from "@/i18n";
 import { LocalLink } from "@/components/ui/LocalLink";
-import { guideLocales } from "@/lib/guides";
+import { guideLocales } from "@/lib/content/guides";
 import { cn } from "@/lib/utils";
 
 type Props = {

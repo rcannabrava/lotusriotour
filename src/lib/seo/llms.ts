@@ -2,7 +2,7 @@ import { SITE } from "@/constants/site";
 import { LOCALES, localizedPath } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { tours } from "@/data/tours";
-import { allGuideFiles, getSitemapGuides } from "./guides";
+import { allGuideFiles, getSitemapGuides } from "@/lib/content/guides";
 import { absoluteUrl } from "./seo";
 
 /** llms.txt: a plain-text briefing for AI assistants, generated from the English dictionary. */
