@@ -10,8 +10,6 @@ export type TourMeta = {
   ogImage: string;
   /** Starting price in USD per group. Leave undefined until confirmed: schema.org offers only appear when set. */
   priceFrom?: number;
-  /** Typical duration in hours (ISO 8601 in structured data). */
-  durationHours?: number;
   /** Ordered list of attractions, used as the itinerary in structured data. */
   attractions: string[];
 };
@@ -22,7 +20,6 @@ export const tours: TourMeta[] = [
     ogImage: "/og/rio-express.jpg",
     imageName: "tour-christ",
     highlight: "mostLoved",
-    durationHours: 8,
     attractions: ["Christ the Redeemer", "Sugarloaf Mountain", "Selarón Steps", "Copacabana Beach"],
   },
   {
@@ -35,7 +32,6 @@ export const tours: TourMeta[] = [
     id: "rio-nature",
     ogImage: "/og/rio-nature.jpg",
     imageName: "tour-nature",
-    durationHours: 8,
     attractions: ["Tijuca Forest", "Rio de Janeiro Botanical Garden"],
   },
   {
@@ -55,7 +51,6 @@ export const tours: TourMeta[] = [
     id: "boat",
     ogImage: "/og/boat.jpg",
     imageName: "tour-boat",
-    durationHours: 6,
     attractions: ["Sugarloaf Mountain", "Guanabara Bay", "Niterói"],
   },
 ];
