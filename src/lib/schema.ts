@@ -41,15 +41,9 @@ export function entityGraph(locale: Locale) {
     knowsLanguage: ["en", "pt", "es"],
     sameAs: sameAs(),
     ...(FACTS.priceRange && { priceRange: FACTS.priceRange }),
-    ...(FACTS.rating &&
-      FACTS.reviewCount && {
-        aggregateRating: {
-          "@type": "AggregateRating",
-          ratingValue: FACTS.rating,
-          reviewCount: FACTS.reviewCount,
-          bestRating: 5,
-        },
-      }),
+    // No aggregateRating here: rating the site's own business is a "self-serving review"
+    // under Google's review-snippet policy for LocalBusiness/Organization. The Tripadvisor
+    // profile is linked in sameAs, which is where search and AI engines read the reviews.
   };
 
   const person = {

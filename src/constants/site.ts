@@ -15,14 +15,16 @@ export const SITE = {
 } as const;
 
 /**
- * Verifiable facts used in structured data (schema.org) and in the About stats.
- * Leave a field undefined until the real value is confirmed: the schema only
- * includes what is filled in, so nothing is ever invented.
+ * Verifiable facts about the business. Leave a field undefined until the real value is
+ * confirmed, so nothing is ever invented.
  */
 type VerifiedFacts = {
-  /** Tripadvisor average rating, e.g. 5 */
+  /**
+   * Tripadvisor average rating, e.g. 5. Reference only: it is deliberately NOT emitted as
+   * schema.org aggregateRating (Google treats a business rating itself as a self-serving review).
+   */
   rating?: number;
-  /** Total number of Tripadvisor reviews, e.g. 115 */
+  /** Total number of Tripadvisor reviews, e.g. 115. Reference only, same as `rating`. */
   reviewCount?: number;
   /** Google Maps / Business Profile URL */
   googleBusinessUrl?: string;

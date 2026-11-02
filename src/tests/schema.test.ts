@@ -15,8 +15,11 @@ describe("entityGraph", () => {
     expect(graph.some((n) => n["@type"] === "WebSite")).toBe(true);
   });
 
+  it("never self-rates the business (Google self-serving review policy)", () => {
+    expect(business.aggregateRating).toBeUndefined();
+  });
+
   it("only emits verified facts that are filled in FACTS", () => {
-    expect(Boolean(business.aggregateRating)).toBe(Boolean(FACTS.rating && FACTS.reviewCount));
     expect(business.priceRange).toBe(FACTS.priceRange);
     expect(Boolean(person.hasCredential)).toBe(Boolean(FACTS.cadastur));
     if (FACTS.googleBusinessUrl) expect(business.sameAs).toContain(FACTS.googleBusinessUrl);
