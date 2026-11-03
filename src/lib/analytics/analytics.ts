@@ -18,13 +18,16 @@ export function isAnalyticsEnabled(): boolean {
   return isBrowser() && !!GA_ID;
 }
 
+/** Choice made during this visit, used when localStorage is blocked (some private modes). */
+let sessionConsent: Consent | null = null;
+
 export function getStoredConsent(): Consent | null {
   if (!isBrowser()) return null;
   try {
     const value = window.localStorage.getItem(CONSENT_KEY);
-    return value === "granted" || value === "denied" ? value : null;
+    return value === "granted" || value === "denied" ? value : sessionConsent;
   } catch {
-    return null;
+    return sessionConsent;
   }
 }
 
@@ -61,14 +64,26 @@ export function initAnalytics(): void {
 
 export function setConsent(value: Consent): void {
   if (!isBrowser()) return;
+  sessionConsent = value;
   try {
     window.localStorage.setItem(CONSENT_KEY, value);
   } catch {
-    /* storage unavailable: the choice only lasts for this visit */
+    /* storage unavailable: sessionConsent keeps the choice for this visit */
   }
   if (isAnalyticsEnabled()) {
     gtag("consent", "update", { analytics_storage: value });
   }
+  consentListeners.forEach((listener) => listener());
+}
+
+// Lets React components read the consent as an external store (useSyncExternalStore)
+const consentListeners = new Set<() => void>();
+
+export function subscribeConsent(listener: () => void): () => void {
+  consentListeners.add(listener);
+  return () => {
+    consentListeners.delete(listener);
+  };
 }
 
 export function trackEvent(name: string, params: Record<string, string | number | undefined> = {}) {
