@@ -32,7 +32,14 @@ export default tseslint.config(
           ],
         },
       ],
-      "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
+      // TanStack file routes export `Route` next to the page component
+      "react-refresh/only-export-components": [
+        "warn",
+        {
+          allowConstantExport: true,
+          extraHOCs: ["createFileRoute", "createRootRouteWithContext"],
+        },
+      ],
       "@typescript-eslint/no-unused-vars": "off",
     },
   },
