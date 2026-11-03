@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Check, ChevronDown, Globe } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useTranslate } from "@tolgee/react";
-import { LANGUAGES, type Lang } from "@/i18n/languages";
-import { useLanguage } from "@/i18n/languages";
+import { useLocation } from "@tanstack/react-router";
+import { LOCALES, stripLocale, useI18n, type Locale } from "@/i18n";
+import { LocalLink } from "@/components/ui/LocalLink";
+import { guideLocales } from "@/lib/guides";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -12,12 +13,17 @@ type Props = {
 };
 
 export function LanguageSwitcher({ variant = "floating", className }: Props) {
-  const { lang, setLang } = useLanguage();
-  const { t } = useTranslate();
+  const { locale, d } = useI18n();
+  const basePath = stripLocale(useLocation().pathname);
+
+  // A guide that is not translated yet sends the visitor to the guides index instead of a 404
+  const guideSlug = basePath.match(/^\/guides\/([^/]+)$/)?.[1];
+  const targetPath = (code: Locale) =>
+    guideSlug && !guideLocales(guideSlug).includes(code) ? "/guides" : basePath;
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  const current = LANGUAGES.find((l) => l.code === lang) ?? LANGUAGES[0];
+  const current = LOCALES.find((l) => l.code === locale) ?? LOCALES[0];
 
   useEffect(() => {
     function onClick(e: MouseEvent) {
@@ -46,6 +52,7 @@ export function LanguageSwitcher({ variant = "floating", className }: Props) {
         onClick={() => setOpen((v) => !v)}
         aria-haspopup="listbox"
         aria-expanded={open}
+        aria-label={d.languageSwitcher.label}
         className={cn(
           "inline-flex items-center gap-2 rounded-full border px-3.5 py-2 text-xs font-medium uppercase tracking-[0.18em] transition-all duration-300",
           triggerStyles,
@@ -70,18 +77,17 @@ export function LanguageSwitcher({ variant = "floating", className }: Props) {
             transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
             className="absolute right-0 z-50 mt-2 w-52 overflow-hidden rounded-xl border border-border/70 bg-background/95 p-1.5 shadow-elegant backdrop-blur-xl"
           >
-            {LANGUAGES.map((l) => {
-              const active = l.code === lang;
+            {LOCALES.map((l) => {
+              const active = l.code === locale;
               return (
                 <li key={l.code}>
-                  <button
-                    type="button"
+                  <LocalLink
+                    to={targetPath(l.code)}
+                    locale={l.code}
+                    hrefLang={l.htmlLang}
                     role="option"
                     aria-selected={active}
-                    onClick={() => {
-                      setLang(l.code as Lang);
-                      setOpen(false);
-                    }}
+                    onClick={() => setOpen(false)}
                     className={cn(
                       "flex w-full items-center justify-between gap-3 rounded-lg px-3 py-2.5 text-left text-sm transition-colors",
                       active
@@ -101,7 +107,7 @@ export function LanguageSwitcher({ variant = "floating", className }: Props) {
                       </span>
                     </span>
                     {active && <Check size={14} className="text-gold" aria-hidden />}
-                  </button>
+                  </LocalLink>
                 </li>
               );
             })}

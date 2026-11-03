@@ -1,15 +1,16 @@
 import { motion } from "framer-motion";
-import aboutImg from "@/assets/about-rio.jpg";
-import { SITE } from "@/constants/site";
-import { useTranslate } from "@tolgee/react";
+import { SITE, STATS } from "@/constants/site";
+import { useI18n } from "@/i18n";
+import { ResponsiveImage } from "@/components/ui/ResponsiveImage";
+import { LocalLink } from "@/components/ui/LocalLink";
 
 export function About() {
-  const { t } = useTranslate();
+  const { d } = useI18n();
   const stats = [
-    { value: "10+", label: t("about.stats.years") },
-    { value: "3", label: t("about.stats.languages") },
-    { value: "1k+", label: t("about.stats.travelers") },
-    { value: "5★", label: t("about.stats.rating") },
+    { value: STATS.years, label: d.about.stats.years },
+    { value: STATS.languages, label: d.about.stats.languages },
+    { value: STATS.travelers, label: d.about.stats.travelers },
+    { value: STATS.rating, label: d.about.stats.rating },
   ];
   return (
     <section id="about" className="relative bg-background py-28 lg:py-40">
@@ -22,9 +23,10 @@ export function About() {
           className="lg:col-span-5"
         >
           <div className="relative">
-            <img
-              src={aboutImg}
-              alt="Private Tour Guide Patricia Cannabrava"
+            <ResponsiveImage
+              name="about-rio"
+              sizes="(min-width: 1024px) 40vw, 100vw"
+              alt={d.about.imageAlt}
               loading="lazy"
               width={1280}
               height={1600}
@@ -33,7 +35,7 @@ export function About() {
             <div className="absolute -bottom-8 -right-6 hidden rounded-2xl bg-card p-6 shadow-elegant ring-1 ring-border lg:block">
               <p className="font-display text-2xl text-foreground">{SITE.guide}</p>
               <p className="mt-1 text-xs tracking-widest text-muted-foreground uppercase">
-                {t("about.role")}
+                {d.about.role}
               </p>
             </div>
           </div>
@@ -46,14 +48,20 @@ export function About() {
           transition={{ duration: 0.8, delay: 0.1 }}
           className="lg:col-span-7"
         >
-          <span className="eyebrow text-gold">{t("about.eyebrow")}</span>
+          <span className="eyebrow text-gold">{d.about.eyebrow}</span>
           <h2 className="mt-5 font-display text-4xl leading-tight text-foreground text-balance sm:text-5xl">
-            {t("about.title")}
+            {d.about.title}
           </h2>
           <div className="mt-8 space-y-5 text-base leading-relaxed text-muted-foreground">
-            <p>{t("about.p1")}</p>
-            <p>{t("about.p2")}</p>
+            <p>{d.about.p1}</p>
+            <p>{d.about.p2}</p>
           </div>
+          <LocalLink
+            to="/about"
+            className="mt-8 inline-flex items-center gap-1 text-sm font-medium text-foreground hover:text-gold"
+          >
+            {d.about.more} <span>→</span>
+          </LocalLink>
 
           <dl className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4">
             {stats.map((s) => (

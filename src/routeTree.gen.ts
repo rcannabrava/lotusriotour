@@ -9,50 +9,236 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as LlmsDottxtRouteImport } from './routes/llms[.]txt'
+import { Route as Char123LangChar125RouteRouteImport } from './routes/{-$lang}/route'
+import { Route as Char123LangChar125IndexRouteImport } from './routes/{-$lang}/index'
+import { Route as Char123LangChar125AboutRouteImport } from './routes/{-$lang}/about'
+import { Route as Char123LangChar125ToursIndexRouteImport } from './routes/{-$lang}/tours/index'
+import { Route as Char123LangChar125GuidesIndexRouteImport } from './routes/{-$lang}/guides/index'
+import { Route as Char123LangChar125ToursTourIdRouteImport } from './routes/{-$lang}/tours/$tourId'
+import { Route as Char123LangChar125GuidesSlugRouteImport } from './routes/{-$lang}/guides/$slug'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LlmsDottxtRoute = LlmsDottxtRouteImport.update({
+  id: '/llms.txt',
+  path: '/llms.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Char123LangChar125RouteRoute = Char123LangChar125RouteRouteImport.update({
+  id: '/{-$lang}',
+  path: '/{-$lang}',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Char123LangChar125IndexRoute = Char123LangChar125IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => Char123LangChar125RouteRoute,
+} as any)
+const Char123LangChar125AboutRoute = Char123LangChar125AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => Char123LangChar125RouteRoute,
+} as any)
+const Char123LangChar125ToursIndexRoute =
+  Char123LangChar125ToursIndexRouteImport.update({
+    id: '/tours/',
+    path: '/tours/',
+    getParentRoute: () => Char123LangChar125RouteRoute,
+  } as any)
+const Char123LangChar125GuidesIndexRoute =
+  Char123LangChar125GuidesIndexRouteImport.update({
+    id: '/guides/',
+    path: '/guides/',
+    getParentRoute: () => Char123LangChar125RouteRoute,
+  } as any)
+const Char123LangChar125ToursTourIdRoute =
+  Char123LangChar125ToursTourIdRouteImport.update({
+    id: '/tours/$tourId',
+    path: '/tours/$tourId',
+    getParentRoute: () => Char123LangChar125RouteRoute,
+  } as any)
+const Char123LangChar125GuidesSlugRoute =
+  Char123LangChar125GuidesSlugRouteImport.update({
+    id: '/guides/$slug',
+    path: '/guides/$slug',
+    getParentRoute: () => Char123LangChar125RouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/{-$lang}': typeof Char123LangChar125RouteRouteWithChildren
+  '/llms.txt': typeof LlmsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/{-$lang}/about': typeof Char123LangChar125AboutRoute
+  '/{-$lang}/': typeof Char123LangChar125IndexRoute
+  '/{-$lang}/guides/$slug': typeof Char123LangChar125GuidesSlugRoute
+  '/{-$lang}/tours/$tourId': typeof Char123LangChar125ToursTourIdRoute
+  '/{-$lang}/guides/': typeof Char123LangChar125GuidesIndexRoute
+  '/{-$lang}/tours/': typeof Char123LangChar125ToursIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/llms.txt': typeof LlmsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/{-$lang}/about': typeof Char123LangChar125AboutRoute
+  '/{-$lang}': typeof Char123LangChar125IndexRoute
+  '/{-$lang}/guides/$slug': typeof Char123LangChar125GuidesSlugRoute
+  '/{-$lang}/tours/$tourId': typeof Char123LangChar125ToursTourIdRoute
+  '/{-$lang}/guides': typeof Char123LangChar125GuidesIndexRoute
+  '/{-$lang}/tours': typeof Char123LangChar125ToursIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
+  '/{-$lang}': typeof Char123LangChar125RouteRouteWithChildren
+  '/llms.txt': typeof LlmsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/{-$lang}/about': typeof Char123LangChar125AboutRoute
+  '/{-$lang}/': typeof Char123LangChar125IndexRoute
+  '/{-$lang}/guides/$slug': typeof Char123LangChar125GuidesSlugRoute
+  '/{-$lang}/tours/$tourId': typeof Char123LangChar125ToursTourIdRoute
+  '/{-$lang}/guides/': typeof Char123LangChar125GuidesIndexRoute
+  '/{-$lang}/tours/': typeof Char123LangChar125ToursIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/{-$lang}'
+    | '/llms.txt'
+    | '/sitemap.xml'
+    | '/{-$lang}/about'
+    | '/{-$lang}/'
+    | '/{-$lang}/guides/$slug'
+    | '/{-$lang}/tours/$tourId'
+    | '/{-$lang}/guides/'
+    | '/{-$lang}/tours/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/llms.txt'
+    | '/sitemap.xml'
+    | '/{-$lang}/about'
+    | '/{-$lang}'
+    | '/{-$lang}/guides/$slug'
+    | '/{-$lang}/tours/$tourId'
+    | '/{-$lang}/guides'
+    | '/{-$lang}/tours'
+  id:
+    | '__root__'
+    | '/{-$lang}'
+    | '/llms.txt'
+    | '/sitemap.xml'
+    | '/{-$lang}/about'
+    | '/{-$lang}/'
+    | '/{-$lang}/guides/$slug'
+    | '/{-$lang}/tours/$tourId'
+    | '/{-$lang}/guides/'
+    | '/{-$lang}/tours/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
+  Char123LangChar125RouteRoute: typeof Char123LangChar125RouteRouteWithChildren
+  LlmsDottxtRoute: typeof LlmsDottxtRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/llms.txt': {
+      id: '/llms.txt'
+      path: '/llms.txt'
+      fullPath: '/llms.txt'
+      preLoaderRoute: typeof LlmsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/{-$lang}': {
+      id: '/{-$lang}'
+      path: '/{-$lang}'
+      fullPath: '/{-$lang}'
+      preLoaderRoute: typeof Char123LangChar125RouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/{-$lang}/': {
+      id: '/{-$lang}/'
+      path: '/'
+      fullPath: '/{-$lang}/'
+      preLoaderRoute: typeof Char123LangChar125IndexRouteImport
+      parentRoute: typeof Char123LangChar125RouteRoute
+    }
+    '/{-$lang}/about': {
+      id: '/{-$lang}/about'
+      path: '/about'
+      fullPath: '/{-$lang}/about'
+      preLoaderRoute: typeof Char123LangChar125AboutRouteImport
+      parentRoute: typeof Char123LangChar125RouteRoute
+    }
+    '/{-$lang}/tours/': {
+      id: '/{-$lang}/tours/'
+      path: '/tours'
+      fullPath: '/{-$lang}/tours/'
+      preLoaderRoute: typeof Char123LangChar125ToursIndexRouteImport
+      parentRoute: typeof Char123LangChar125RouteRoute
+    }
+    '/{-$lang}/guides/': {
+      id: '/{-$lang}/guides/'
+      path: '/guides'
+      fullPath: '/{-$lang}/guides/'
+      preLoaderRoute: typeof Char123LangChar125GuidesIndexRouteImport
+      parentRoute: typeof Char123LangChar125RouteRoute
+    }
+    '/{-$lang}/tours/$tourId': {
+      id: '/{-$lang}/tours/$tourId'
+      path: '/tours/$tourId'
+      fullPath: '/{-$lang}/tours/$tourId'
+      preLoaderRoute: typeof Char123LangChar125ToursTourIdRouteImport
+      parentRoute: typeof Char123LangChar125RouteRoute
+    }
+    '/{-$lang}/guides/$slug': {
+      id: '/{-$lang}/guides/$slug'
+      path: '/guides/$slug'
+      fullPath: '/{-$lang}/guides/$slug'
+      preLoaderRoute: typeof Char123LangChar125GuidesSlugRouteImport
+      parentRoute: typeof Char123LangChar125RouteRoute
     }
   }
 }
 
+interface Char123LangChar125RouteRouteChildren {
+  Char123LangChar125AboutRoute: typeof Char123LangChar125AboutRoute
+  Char123LangChar125IndexRoute: typeof Char123LangChar125IndexRoute
+  Char123LangChar125GuidesSlugRoute: typeof Char123LangChar125GuidesSlugRoute
+  Char123LangChar125ToursTourIdRoute: typeof Char123LangChar125ToursTourIdRoute
+  Char123LangChar125GuidesIndexRoute: typeof Char123LangChar125GuidesIndexRoute
+  Char123LangChar125ToursIndexRoute: typeof Char123LangChar125ToursIndexRoute
+}
+
+const Char123LangChar125RouteRouteChildren: Char123LangChar125RouteRouteChildren =
+  {
+    Char123LangChar125AboutRoute: Char123LangChar125AboutRoute,
+    Char123LangChar125IndexRoute: Char123LangChar125IndexRoute,
+    Char123LangChar125GuidesSlugRoute: Char123LangChar125GuidesSlugRoute,
+    Char123LangChar125ToursTourIdRoute: Char123LangChar125ToursTourIdRoute,
+    Char123LangChar125GuidesIndexRoute: Char123LangChar125GuidesIndexRoute,
+    Char123LangChar125ToursIndexRoute: Char123LangChar125ToursIndexRoute,
+  }
+
+const Char123LangChar125RouteRouteWithChildren =
+  Char123LangChar125RouteRoute._addFileChildren(
+    Char123LangChar125RouteRouteChildren,
+  )
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
+  Char123LangChar125RouteRoute: Char123LangChar125RouteRouteWithChildren,
+  LlmsDottxtRoute: LlmsDottxtRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

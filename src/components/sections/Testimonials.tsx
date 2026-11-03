@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useTranslate } from "@tolgee/react";
+import { useI18n } from "@/i18n";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Mousewheel, FreeMode } from "swiper/modules";
@@ -12,22 +12,20 @@ import { testimonials } from "@/data/testimonials";
 
 export function Testimonials() {
   const [expandedReview, setExpandedReview] = useState<number | null>(null);
-  const { t } = useTranslate();
+  const { d } = useI18n();
   return (
     <section id="reviews" className="bg-background py-28 lg:py-40">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-2xl">
-          <span className="eyebrow text-gold">{t("testimonials.eyebrow")}</span>
+          <span className="eyebrow text-gold">{d.testimonials.eyebrow}</span>
           <h2 className="mt-5 font-display text-4xl leading-tight text-balance sm:text-5xl">
-            {t("testimonials.title")}
+            {d.testimonials.title}
           </h2>
         </div>
 
         <div className="mt-16 grid items-center gap-10 lg:grid-cols-[320px_1fr]">
           <div>
-            <h3 className="text-5xl font-bold uppercase text-black">
-              {t("testimonials.subtitle")}
-            </h3>
+            <h3 className="text-5xl font-bold uppercase text-black">{d.testimonials.subtitle}</h3>
 
             <div className="mt-6 flex gap-2">
               {Array.from({ length: 5 }).map((_, i) => (
@@ -40,7 +38,7 @@ export function Testimonials() {
               ))}
             </div>
 
-            <p className="mt-4 text-lg text-black/70">{t("testimonials.description")}</p>
+            <p className="mt-4 text-lg text-black/70">{d.testimonials.description}</p>
 
             <div className="mt-6 flex items-center gap-3">
               <img
@@ -90,17 +88,21 @@ export function Testimonials() {
                   <div className="h-full min-h-80 rounded-3xl bg-white p-6 text-black">
                     <div className="flex items-start justify-between">
                       <div className="flex items-center gap-4">
-                        <img
-                          src={item.avatar}
-                          alt={item.name}
-                          className="h-14 w-14 rounded-full object-cover"
-                        />
+                        <span
+                          aria-hidden
+                          className="flex h-14 w-14 items-center justify-center rounded-full bg-secondary font-display text-xl text-primary"
+                        >
+                          {item.name.charAt(0)}
+                        </span>
 
                         <div>
                           <h3 className="text-xl font-semibold">{item.name}</h3>
 
                           <p className="text-sm text-black/50">
-                            {t(`testimonials.time.${item.id - 1}`)}
+                            {
+                              d.testimonials.reviews[item.id as keyof typeof d.testimonials.reviews]
+                                .time
+                            }
                           </p>
                         </div>
                       </div>
@@ -128,7 +130,10 @@ export function Testimonials() {
                         expandedReview === item.id ? "" : "line-clamp-4"
                       }`}
                     >
-                      {t(`testimonials.comment.${item.id - 1}`)}
+                      {
+                        d.testimonials.reviews[item.id as keyof typeof d.testimonials.reviews]
+                          .comment
+                      }
                     </p>
 
                     <button
@@ -136,8 +141,8 @@ export function Testimonials() {
                       className="mt-8 text-lg font-medium text-black/40 transition hover:text-black"
                     >
                       {expandedReview === item.id
-                        ? t("testimonials.show_less")
-                        : t("testimonials.show_more")}
+                        ? d.testimonials.show_less
+                        : d.testimonials.show_more}
                     </button>
                   </div>
                 </SwiperSlide>

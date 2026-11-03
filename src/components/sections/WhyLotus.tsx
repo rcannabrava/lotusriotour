@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ShieldCheck, Sparkles, Users, Languages, Car, Heart } from "lucide-react";
-import { useTranslate } from "@tolgee/react";
+import { useI18n } from "@/i18n";
 
 const items = [
   { key: 0, Icon: ShieldCheck },
@@ -12,16 +12,16 @@ const items = [
 ] as const;
 
 export function WhyLotus() {
-  const { t } = useTranslate();
+  const { d } = useI18n();
   return (
     <section id="why" className="relative gradient-deep py-28 text-white lg:py-40">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-2xl">
-          <span className="eyebrow text-gold">{t("why.eyebrow")}</span>
+          <span className="eyebrow text-gold">{d.why.eyebrow}</span>
           <h2 className="mt-5 font-display text-4xl leading-tight text-balance sm:text-5xl">
-            {t("why.title")}
+            {d.why.title}
           </h2>
-          <p className="mt-6 text-white/75">{t("why.intro")}</p>
+          <p className="mt-6 text-white/75">{d.why.intro}</p>
         </div>
 
         <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -37,10 +37,8 @@ export function WhyLotus() {
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gold/15 text-gold">
                 <Icon size={20} strokeWidth={1.6} />
               </div>
-              <h3 className="mt-6 font-display text-xl">{t(`why.items.${key}.title`)}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/70">
-                {t(`why.items.${key}.text`)}
-              </p>
+              <h3 className="mt-6 font-display text-xl">{d.why.items[key].title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-white/70">{d.why.items[key].text}</p>
             </motion.div>
           ))}
         </div>

@@ -1,15 +1,18 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
-  Link,
   createRootRouteWithContext,
   useRouter,
   HeadContent,
   Scripts,
+  useParams,
 } from "@tanstack/react-router";
+import { useEffect } from "react";
 
 import appCss from "../styles.css?url";
-import { LanguageProvider } from "@/i18n/LanguageProvider";
+import { DEFAULT_LOCALE, getLocaleMeta, isLocale } from "@/i18n/config";
+import { CookieBanner } from "@/components/layout/CookieBanner";
+import { initAnalytics } from "@/lib/analytics";
 
 function NotFoundComponent() {
   return (
@@ -21,19 +24,19 @@ function NotFoundComponent() {
           The page you're looking for doesn't exist or has been moved.
         </p>
         <div className="mt-6">
-          <Link
-            to="/"
+          <a
+            href="/"
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
             Go home
-          </Link>
+          </a>
         </div>
       </div>
     </div>
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error, reset }: { error: unknown; reset: () => void }) {
   console.error(error);
   const router = useRouter();
 
@@ -80,17 +83,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
       {
         name: "theme-color",
-        content: "#000000",
+        content: "#f8f6ef",
       },
 
       {
         name: "robots",
         content: "index, follow",
-      },
-
-      {
-        name: "twitter:card",
-        content: "summary_large_image",
       },
     ],
 
@@ -130,8 +128,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: React.ReactNode }) {
+  const { lang } = useParams({ strict: false }) as { lang?: string };
+  const htmlLang = getLocaleMeta(isLocale(lang) ? lang : DEFAULT_LOCALE).htmlLang;
   return (
-    <html lang="en">
+    <html lang={htmlLang}>
       <head>
         <HeadContent />
       </head>
@@ -146,11 +146,14 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
+  useEffect(() => {
+    initAnalytics();
+  }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
-      <LanguageProvider>
-        <Outlet />
-      </LanguageProvider>
+      <Outlet />
+      <CookieBanner />
     </QueryClientProvider>
   );
 }
