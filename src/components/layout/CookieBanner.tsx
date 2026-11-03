@@ -1,23 +1,22 @@
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { useI18n } from "@/i18n";
-import { getStoredConsent, isAnalyticsEnabled, setConsent } from "@/lib/analytics";
+import {
+  getStoredConsent,
+  isAnalyticsEnabled,
+  setConsent,
+  subscribeConsent,
+} from "@/lib/analytics";
 import { buttonStyles } from "@/components/ui/button-styles";
+
+const needsChoice = () => isAnalyticsEnabled() && getStoredConsent() === null;
 
 /** Consent Mode banner. Renders only when analytics is configured and the visitor has not chosen yet. */
 export function CookieBanner() {
   const { d } = useI18n();
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    setVisible(isAnalyticsEnabled() && getStoredConsent() === null);
-  }, []);
+  // The server snapshot is false, so SSR and hydration match; the client then reads the stored choice.
+  const visible = useSyncExternalStore(subscribeConsent, needsChoice, () => false);
 
   if (!visible) return null;
-
-  const choose = (value: "granted" | "denied") => {
-    setConsent(value);
-    setVisible(false);
-  };
 
   return (
     <div
@@ -29,14 +28,14 @@ export function CookieBanner() {
       <div className="flex shrink-0 gap-3">
         <button
           type="button"
-          onClick={() => choose("denied")}
+          onClick={() => setConsent("denied")}
           className={buttonStyles("outline", "px-5 py-2.5")}
         >
           {d.cookies.decline}
         </button>
         <button
           type="button"
-          onClick={() => choose("granted")}
+          onClick={() => setConsent("granted")}
           className={buttonStyles("primary", "px-5 py-2.5")}
         >
           {d.cookies.accept}
