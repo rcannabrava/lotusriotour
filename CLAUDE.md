@@ -21,7 +21,7 @@ TanStack Start (SSR) + TanStack Router (file routes), React 19, Tailwind v4, Fra
 - **WhatsApp**: always `WhatsAppLink` with a `placement` (analytics).
 - **Images**: `ResponsiveImage`; add sources to `scripts/optimize-images.mjs` and run `npm run images`.
 - **Security**: a new external origin (font, script, image, embed) must be added to the CSP in `src/lib/security/security-headers.ts`. `VITE_*` variables are public: never put secrets in them. `dangerouslySetInnerHTML` only for Markdown from `content/` (it is not sanitized). External links get `rel="noopener noreferrer"`. Details in [SECURITY.md](SECURITY.md).
-- **Folders**: `src/lib/` and `src/tests/` are split by domain (`seo`, `security`, `errors`, `content`, `analytics`...). Put new code in the matching folder or create one; a test goes in `src/tests/<domain>/`. Original photos go in `src/assets/photos/`, logo/icons in `src/assets/brand/`.
+- **Folders**: `src/lib/` and `src/tests/` are split by domain (`seo`, `security`, `errors`, `content`, `analytics`...). Put new code in the matching folder or create one; generic helpers stay in `src/lib/utils.ts`. A test goes in `src/tests/<domain>/` (one folder per domain of `src/`, not only of `lib/`). Original photos go in `src/assets/photos/`, logo/icons in `src/assets/brand/`.
 - **Commits**: Conventional Commits (`feat:`, `fix:`, `docs:`…). Files use LF line endings and Prettier (`npm run format`).
 
 ## Commands

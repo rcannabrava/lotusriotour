@@ -75,7 +75,7 @@ src/
 ├── i18n/         # locales and typed dictionaries
 ├── routes/       # pages under {-$lang}/
 ├── lib/          # seo, security, errors, content, analytics
-├── tests/        # one folder per domain, mirroring lib/ (seo, security, ...)
+├── tests/        # one folder per domain (seo, security, i18n, data, ...)
 └── server.ts
 ```
 
