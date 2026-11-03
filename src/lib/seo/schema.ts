@@ -2,7 +2,7 @@ import { FACTS, SITE } from "@/constants/site";
 import { getLocaleMeta, localizedPath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import type { TourMeta } from "@/data/tours";
-import type { Guide } from "./guides";
+import type { Guide } from "@/lib/content/guides";
 import { absoluteUrl } from "./seo";
 
 const ids = {

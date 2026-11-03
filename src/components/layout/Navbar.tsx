@@ -6,7 +6,7 @@ import { useI18n } from "@/i18n";
 import { LocalLink } from "@/components/ui/LocalLink";
 import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
 import { LanguageSwitcher } from "./LanguageSwitcher";
-import logo from "@/assets/logo.svg";
+import logo from "@/assets/brand/logo.svg";
 import { TripadvisorIcon } from "./tripadvisorIcon";
 import { useNavLinks } from "./useNavLinks";
 

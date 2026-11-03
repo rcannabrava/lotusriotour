@@ -5,7 +5,7 @@ import {
   isAnalyticsEnabled,
   setConsent,
   subscribeConsent,
-} from "@/lib/analytics";
+} from "@/lib/analytics/analytics";
 import { buttonStyles } from "@/components/ui/button-styles";
 
 const needsChoice = () => isAnalyticsEnabled() && getStoredConsent() === null;

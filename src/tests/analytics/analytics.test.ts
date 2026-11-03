@@ -6,7 +6,7 @@ import {
   setConsent,
   subscribeConsent,
   trackEvent,
-} from "@/lib/analytics";
+} from "@/lib/analytics/analytics";
 
 describe("analytics", () => {
   it("is disabled without VITE_GA_ID", () => {

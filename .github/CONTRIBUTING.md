@@ -70,11 +70,12 @@ style: improve mobile spacing
 
 ```txt
 src/
+├── assets/       # photos (originals), brand (logo, icons), optimized (generated)
 ├── components/   # layout, sections, ui (design-system primitives)
 ├── i18n/         # locales and typed dictionaries
 ├── routes/       # pages under {-$lang}/
-├── lib/          # seo, schema, sitemap, analytics
-├── assets/
+├── lib/          # seo, security, errors, content, analytics
+├── tests/        # one folder per domain (seo, security, i18n, data, ...)
 └── server.ts
 ```
 

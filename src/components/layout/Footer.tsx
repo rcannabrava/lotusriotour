@@ -3,7 +3,7 @@ import { SITE } from "@/constants/site";
 import { useI18n } from "@/i18n";
 import { LocalLink } from "@/components/ui/LocalLink";
 import { WhatsAppLink } from "@/components/ui/WhatsAppLink";
-import logo from "@/assets/logo.svg";
+import logo from "@/assets/brand/logo.svg";
 import { useNavLinks } from "./useNavLinks";
 
 export function Footer() {

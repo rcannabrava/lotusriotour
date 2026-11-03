@@ -4,8 +4,8 @@ import { Tours } from "@/components/sections/Tours";
 import { DEFAULT_LOCALE, isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { tours } from "@/data/tours";
-import { buildHead, absoluteUrl } from "@/lib/seo";
-import { breadcrumbList, entityGraph, faqPage } from "@/lib/schema";
+import { buildHead, absoluteUrl } from "@/lib/seo/seo";
+import { breadcrumbList, entityGraph, faqPage } from "@/lib/seo/schema";
 import { localizedPath } from "@/i18n/config";
 
 export const Route = createFileRoute("/{-$lang}/tours/")({

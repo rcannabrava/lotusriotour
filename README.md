@@ -28,7 +28,10 @@ Patricia has been guiding tourists from all over the world for more than 10 year
 
 ```txt
 src/
-  assets/          # Images and SVGs
+  assets/
+    photos/        # Original photos (source for npm run images)
+    brand/         # Logo and brand icons
+    optimized/     # Generated responsive WebP files (do not edit)
   components/
     layout/        # Navbar, Footer, WhatsApp float button, LanguageSwitcher, CookieBanner
     sections/      # Hero, About, Tours, WhyLotus, Testimonials, FAQ, CTA
@@ -36,10 +39,16 @@ src/
   constants/       # Site constants (name, links, WhatsApp, verified facts)
   data/            # Tours and testimonials metadata
   i18n/            # Locales config and typed dictionaries (locales/en|pt-br|es.ts)
-  lib/             # SEO helpers, schema.ts (JSON-LD), sitemap, llms.txt, analytics
+  lib/
+    seo/           # buildHead, schema.ts (JSON-LD), sitemap, llms.txt
+    security/      # HTTP security headers and CSP
+    errors/        # Error capture and the branded error page
+    content/       # Guides loader (Markdown from content/guides)
+    analytics/     # GA4 with Consent Mode v2
+    utils.ts       # cn() and other shared helpers
   routes/          # Pages under {-$lang}/ (file-based via TanStack Router)
-  tests/           # Unit tests with Vitest
-scripts/           # optimize-images.mjs (npm run images)
+  tests/           # Vitest, one folder per domain (seo, security, i18n, content...)
+scripts/           # optimize-images.mjs (npm run images), new-guide.mjs
 DESIGN.md          # Visual system, read before building UI
 ```
 
@@ -118,8 +127,8 @@ All call-to-action buttons on the website redirect users to [Patricia's WhatsApp
 ## SEO / GEO / AEO
 
 - Every page renders its content on the server (no empty shell), so crawlers and AI bots can read it.
-- `buildHead()` (`src/lib/seo.ts`) generates title, description, canonical, hreflang, Open Graph and Twitter tags.
-- `src/lib/schema.ts` builds JSON-LD: `TravelAgency`/`LocalBusiness`, `Person`, `WebSite`, `FAQPage`, `TouristTrip`, `BreadcrumbList`.
+- `buildHead()` (`src/lib/seo/seo.ts`) generates title, description, canonical, hreflang, Open Graph and Twitter tags.
+- `src/lib/seo/schema.ts` builds JSON-LD: `TravelAgency`/`LocalBusiness`, `Person`, `WebSite`, `FAQPage`, `TouristTrip`, `BreadcrumbList`.
 - `/sitemap.xml` and `/llms.txt` are generated from the same data. `public/robots.txt` explicitly allows search and AI crawlers.
 - Facts that are not confirmed (Tripadvisor rating/count, Google Business Profile URL, Cadastur number, prices) are left empty in `src/constants/site.ts` and `src/data/tours.ts`. They only appear in structured data once filled in.
 
@@ -129,7 +138,7 @@ Set `VITE_GA_ID` (GA4 measurement ID) to enable analytics. It loads with Consent
 
 ## Images
 
-Put originals in `src/assets/`, list them in `scripts/optimize-images.mjs`, then run `npm run images` to generate the responsive WebP files and the 1200x630 social previews.
+Put originals in `src/assets/photos/`, list them in `scripts/optimize-images.mjs`, then run `npm run images` to generate the responsive WebP files and the 1200x630 social previews.
 
 ## Commit conventions
 

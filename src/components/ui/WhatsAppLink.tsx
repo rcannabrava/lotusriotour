@@ -1,7 +1,7 @@
 import type { ComponentProps } from "react";
 import { SITE } from "@/constants/site";
 import { useI18n } from "@/i18n";
-import { trackWhatsAppClick, type WhatsAppPlacement } from "@/lib/analytics";
+import { trackWhatsAppClick, type WhatsAppPlacement } from "@/lib/analytics/analytics";
 
 type Props = Omit<ComponentProps<"a">, "href" | "target" | "rel"> & {
   placement: WhatsAppPlacement;

@@ -18,7 +18,7 @@ function variantsOf(name: string) {
 }
 
 type Props = Omit<ImgHTMLAttributes<HTMLImageElement>, "src" | "srcSet" | "alt"> & {
-  /** Base file name in src/assets, e.g. "tour-christ" */
+  /** Base file name in src/assets/photos, e.g. "tour-christ" */
   name: string;
   alt: string;
   /** Rendered width hint so the browser downloads the smallest sufficient file, e.g. "(min-width: 1024px) 33vw, 100vw" */

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { buildSitemap, getSitePages } from "@/lib/sitemap";
-import { buildLlmsTxt } from "@/lib/llms";
+import { buildSitemap, getSitePages } from "@/lib/seo/sitemap";
+import { buildLlmsTxt } from "@/lib/seo/llms";
 import { tours } from "@/data/tours";
 
 describe("sitemap", () => {

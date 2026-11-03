@@ -1,6 +1,6 @@
 import { format, useI18n } from "@/i18n";
 import { getTour } from "@/data/tours";
-import { formatGuideDate, type Guide } from "@/lib/guides";
+import { formatGuideDate, type Guide } from "@/lib/content/guides";
 import { LocalLink } from "./LocalLink";
 import { ResponsiveImage } from "./ResponsiveImage";
 

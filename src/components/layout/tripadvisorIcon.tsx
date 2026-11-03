@@ -1,4 +1,4 @@
-import tripadvisor from "@/assets/tripadvisor.png";
+import tripadvisor from "@/assets/brand/tripadvisor.png";
 import { SITE } from "@/constants/site";
 
 export function TripadvisorIcon() {

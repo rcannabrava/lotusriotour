@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildCsp, SECURITY_HEADERS, withSecurityHeaders } from "@/lib/security-headers";
+import { buildCsp, SECURITY_HEADERS, withSecurityHeaders } from "@/lib/security/security-headers";
 
 describe("security headers", () => {
   it("adds every header to a response", () => {

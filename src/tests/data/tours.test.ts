@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { getTour, tours } from "@/data/tours";
 
-describe("tour routes", () => {
+describe("tours data", () => {
   it("resolves every tour id used in URLs", () => {
     for (const tour of tours) expect(getTour(tour.id)).toBe(tour);
   });

@@ -99,7 +99,7 @@ Patterns (copy from the referenced file):
 
 - Photos are `object-cover`, `rounded-2xl`, portrait `aspect-4/5` for people/tours, landscape `aspect-4/3` for secondary cards, hero is full-bleed.
 - Always through `ResponsiveImage` with a correct `sizes`; explicit `width`/`height`; `loading="lazy"` except the first image on a page (`fetchPriority="high"`).
-- Add a photo: put the original in `src/assets/`, register it in `scripts/optimize-images.mjs`, run `npm run images`.
+- Add a photo: put the original in `src/assets/photos/`, register it in `scripts/optimize-images.mjs`, run `npm run images`.
 - `alt` text is descriptive, translated (dictionary), never "image of".
 - Social previews: 1200×630 JPG under 250 KB in `public/` (`/og-image.jpg` default, `/og/<tour>.jpg` per tour).
 
@@ -141,5 +141,5 @@ Markdown guides render inside `.prose-lotus` (defined in `styles.css`) with the 
 4. Links via `LocalLink`; WhatsApp via `WhatsAppLink` with a `placement`.
 5. Photos via `ResponsiveImage`.
 6. Strings in the three dictionaries.
-7. `head()` with `buildHead` + JSON-LD (`src/lib/schema.ts`), add the page to `src/lib/sitemap.ts`.
+7. `head()` with `buildHead` + JSON-LD (`src/lib/seo/schema.ts`), add the page to `src/lib/seo/sitemap.ts`.
 8. Check at 375 px and 1440 px; run `npm run typecheck && npm run lint && npm run test`.

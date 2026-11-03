@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { describe, expect, it } from "vitest";
-import { breadcrumbList, entityGraph, faqPage, touristTrip } from "@/lib/schema";
+import { breadcrumbList, entityGraph, faqPage, touristTrip } from "@/lib/seo/schema";
 import { tours } from "@/data/tours";
 import { FACTS } from "@/constants/site";
 

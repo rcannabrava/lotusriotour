@@ -1,4 +1,4 @@
-// Generates the optimized images used by the site. Run after adding or replacing a photo in src/assets:
+// Generates the optimized images used by the site. Run after adding or replacing a photo in src/assets/photos:
 //   npm run images
 //
 // - src/assets/optimized/<name>-<width>.webp  responsive variants (see ResponsiveImage)
@@ -8,7 +8,7 @@ import { mkdir, stat } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 
-const ASSETS = "src/assets";
+const ASSETS = "src/assets/photos";
 const OUT = "src/assets/optimized";
 
 // name: widths to generate

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { alternateLinks, buildHead } from "@/lib/seo";
+import { alternateLinks, buildHead } from "@/lib/seo/seo";
 
 type Tag = Record<string, string>;
 const find = (tags: Tag[], key: string, value: string) => tags.find((t) => t[key] === value);
